@@ -53,5 +53,4 @@
         tools:layout_editor_absoluteX="16dp"
         tools:text="28.04.2022" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
