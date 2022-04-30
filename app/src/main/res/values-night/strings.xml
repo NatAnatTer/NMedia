@@ -2,4 +2,6 @@
 <resources>
     <string name="nmedia">NMedia!</string>
     <string name="post_avatar">Post avatar</string>
+    <string name="share">Share</string>
+    <string name="views">Views</string>
 </resources>
