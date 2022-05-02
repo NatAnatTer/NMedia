@@ -43,6 +43,4 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-//<include
-//android:id="@+id/post"
-//layout="layout/post"/>
+
