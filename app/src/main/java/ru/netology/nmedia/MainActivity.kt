@@ -1,7 +1,5 @@
 package ru.netology.nmedia
 
-import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.DrawableRes
@@ -21,9 +19,9 @@ class MainActivity : AppCompatActivity() {
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             published = "21 мая в 18:36",
             likedByMe = false,
-            likes = 1_099_999,
-            reposts = 1_099_999,
-            views = 987,
+            likes = 999,
+            reposts = 999,
+            views = 1000,
             avatar = R.drawable.ic_netology
         )
         binding.render(postExample)
@@ -37,8 +35,6 @@ class MainActivity : AppCompatActivity() {
             binding.post.repostsCount.text =
                 getRepostsCount(postExample.reposts, postExample)
         }
-
-
     }
 
     private fun ActivityMainBinding.render(post1: Post) {
@@ -47,9 +43,9 @@ class MainActivity : AppCompatActivity() {
         post1.content.also { post.postBody.text = it }
         post.like.setImageResource(getLikeIconResId(post1.likedByMe))
         post.likesCount.text = getTextViewCount(post1.likes)
-        post.usersViewsCount.text = post1.views.toString()
+        post.usersViewsCount.text = getTextViewCount(post1.views)
         post.repostsCount.text = getTextViewCount(post1.reposts)
-        post.avatar.setImageResource(post1.avatar)  //setImageDrawable(Drawable.createFromPath(post1.avatar))
+        post.avatar.setImageResource(post1.avatar)
     }
 
     @DrawableRes
@@ -83,10 +79,10 @@ fun getTextViewCount(count: Int): String {
     return when (count) {
         in 0..999 -> count.toString()
         in 1000..1099 -> (count / 1000).toString() + "K"
-        in 1100..9999 -> (df1.format((count/100).toDouble() / 10.0)).toString() + "K"
+        in 1100..9999 -> (df1.format((count / 100).toDouble() / 10.0)).toString() + "K"
         in 10_000..999_999 -> (count / 1000).toString() + "K"
         in 1_000_000..1_099_999 -> (count / 1_000_000).toString() + "M"
-        in 1_100_000..999_999_999 -> (df1.format((count/100_000).toDouble() / 10.0)).toString() + "M"
+        in 1_100_000..999_999_999 -> (df1.format((count / 100_000).toDouble() / 10.0)).toString() + "M"
         else -> "1B"
     }
 }
