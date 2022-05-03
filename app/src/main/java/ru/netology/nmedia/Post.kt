@@ -1,6 +1,5 @@
 package ru.netology.nmedia
 
-import android.graphics.drawable.Icon
 
 class Post(
     val id: Long,
