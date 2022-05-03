@@ -103,8 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="@dimen/margin_top"
-        android:ellipsize="end"
-        android:singleLine="true"
+
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/like"
         app:layout_constraintTop_toBottomOf="@id/body_barrier"
@@ -130,8 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="@dimen/margin_top"
-        android:ellipsize="end"
-        android:singleLine="true"
+
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/reposts"
         app:layout_constraintTop_toBottomOf="@id/body_barrier"
