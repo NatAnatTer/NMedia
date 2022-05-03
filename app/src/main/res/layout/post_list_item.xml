@@ -70,7 +70,7 @@
         app:constraint_referenced_ids="avatar, date, option" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/post_body"
+        android:id="@+id/postBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top"
@@ -84,10 +84,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="post_body" />
+        app:constraint_referenced_ids="postBody" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/likes"
+        android:id="@+id/like"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top"
@@ -103,10 +103,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="@dimen/margin_top"
-        android:ellipsize="end"
-        android:singleLine="true"
+
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/likes"
+        app:layout_constraintStart_toEndOf="@id/like"
         app:layout_constraintTop_toBottomOf="@id/body_barrier"
         tools:ignore="MissingConstraints,SmallSp"
         tools:layout_editor_absoluteX="16dp"
@@ -130,8 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="@dimen/margin_top"
-        android:ellipsize="end"
-        android:singleLine="true"
+
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/reposts"
         app:layout_constraintTop_toBottomOf="@id/body_barrier"
