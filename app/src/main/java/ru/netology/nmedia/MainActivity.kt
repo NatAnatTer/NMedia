@@ -2,75 +2,110 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
+import ru.netology.nmedia.PostViewModel.PostViewModel
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import java.text.DecimalFormat
 
 
 class MainActivity : AppCompatActivity() {
 
+     private val viewModel by viewModels<PostViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val postExample = Post(
-            id = 1,
-            author = "Нетология. Университет интернет-профессий будущего",
-            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-            published = "21 мая в 18:36",
-            likedByMe = false,
-            likes = 999,
-            reposts = 999,
-            views = 1000,
-            avatar = R.drawable.ic_netology
-        )
-        binding.render(postExample)
-        binding.post.like.setOnClickListener {
-            postExample.likedByMe = !postExample.likedByMe
-            binding.post.like.setImageResource(getLikeIconResId(postExample.likedByMe))
-            binding.post.likesCount.text =
-                getLikesCount(postExample.likedByMe, postExample.likes, postExample)
+
+
+//        val postExample = Post(
+//            id = 1,
+//            author = "Нетология. Университет интернет-профессий будущего",
+//            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+//            published = "21 мая в 18:36",
+//            likedByMe = false,
+//            likes = 999,
+//            reposts = 999,
+//            views = 1000,
+//            avatar = R.drawable.ic_netology
+//        )
+        viewModel.data.observe(this) { post ->
+            //binding.render(post)
+            with(binding) {
+                authorName.text = post.author
+                date.text = post.published
+                post.content.also { postBody.text = it }
+                like.setImageResource(getLikeIconResId(post.likedByMe))
+                likesCount.text = getTextViewCount(post.likes)
+                usersViewsCount.text = getTextViewCount(post.views)
+                repostsCount.text = getTextViewCount(post.reposts)
+                avatar.setImageResource(post.avatar)
+            }
         }
-        binding.post.reposts.setOnClickListener {
-            binding.post.repostsCount.text =
-                getRepostsCount(postExample.reposts, postExample)
-        }
+
+//        binding.post.like.setOnClickListener {
+//            viewModel.onLkeClicked()
+
+
+//            postExample.likedByMe = !postExample.likedByMe
+//            binding.post.like.setImageResource(getLikeIconResId(postExample.likedByMe))
+//            binding.post.likesCount.text =
+//                getLikesCount(postExample.likedByMe, postExample.likes, postExample)
+//        }
+//        binding.post.reposts.setOnClickListener {
+//            viewModel.onRepostClicked()
+//
+
+
+//            binding.post.repostsCount.text =
+//                getRepostsCount(postExample.reposts, postExample)
+//        }
     }
 
     private fun ActivityMainBinding.render(post1: Post) {
-        post.authorName.text = post1.author
-        post.date.text = post1.published
-        post1.content.also { post.postBody.text = it }
-        post.like.setImageResource(getLikeIconResId(post1.likedByMe))
-        post.likesCount.text = getTextViewCount(post1.likes)
-        post.usersViewsCount.text = getTextViewCount(post1.views)
-        post.repostsCount.text = getTextViewCount(post1.reposts)
-        post.avatar.setImageResource(post1.avatar)
+        authorName.text = post1.author
+        date.text = post1.published
+        post1.content.also { postBody.text = it }
+        like.setImageResource(getLikeIconResId(post1.likedByMe))
+        likesCount.text = getTextViewCount(post1.likes)
+        usersViewsCount.text = getTextViewCount(post1.views)
+        repostsCount.text = getTextViewCount(post1.reposts)
+        avatar.setImageResource(post1.avatar)
     }
+//    private fun ActivityMainBinding.render(post1: Post) {
+//        postList.authorName.text = post1.author
+//        postList.date.text = post1.published
+//        post1.content.also { postList.postBody.text = it }
+//        postList.like.setImageResource(getLikeIconResId(post1.likedByMe))
+//        postList.likesCount.text = getTextViewCount(post1.likes)
+//        postList.usersViewsCount.text = getTextViewCount(post1.views)
+//        postList.repostsCount.text = getTextViewCount(post1.reposts)
+//        postList.avatar.setImageResource(post1.avatar)
+//    }
 
     @DrawableRes
     private fun getLikeIconResId(liked: Boolean) =
         if (liked) R.drawable.ic_liked_16 else R.drawable.ic_likes_16
 
 
-    private fun getLikesCount(liked: Boolean, likes: Int, post1: Post): String {
-        var like: Int = likes
-        if (liked) {
-            like = likes + 1
-        } else if (!liked && likes == 0) {
-            like = likes
-        } else if (!liked && likes > 0) {
-            like = likes - 1
-        }
-        post1.likes = like
+//    private fun getLikesCount(liked: Boolean, likes: Int, post1: Post): String {
+//        var like: Int = likes
+//        if (liked) {
+//            like = likes + 1
+//        } else if (!liked && likes == 0) {
+//            like = likes
+//        } else if (!liked && likes > 0) {
+//            like = likes - 1
+//        }
+//        post1.likes = like
+//
+//        return getTextViewCount(like)
+//    }
 
-        return getTextViewCount(like)
-    }
-
-    private fun getRepostsCount(count: Int, post1: Post): String {
-        post1.reposts += 1
-        return getTextViewCount((count + 1))
-    }
+//    private fun getRepostsCount(count: Int, post1: Post): String {
+//        post1.reposts += 1
+//        return getTextViewCount((count + 1))
+//    }
 
 }
 
