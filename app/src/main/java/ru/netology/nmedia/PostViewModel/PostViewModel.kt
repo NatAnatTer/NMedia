@@ -6,11 +6,9 @@ import ru.netology.nmedia.data.impl.InMemoryPostRepository
 
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = InMemoryPostRepository()
-
-
-    val data = repository.get()
-   // val data by repository::data
+    val data by repository::data
 
     fun onLkeClicked() = repository.like()
     fun onRepostClicked() = repository.repost()
 }
+
