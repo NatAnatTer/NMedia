@@ -1,16 +1,38 @@
 package ru.netology.nmedia.data.impl
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
+import kotlin.properties.Delegates
 
 
 internal class PostsAdapter(
-    private val onLikeClicked: (Post) -> Unit
+    private val onLikeClicked: (Post) -> Unit,
+    private val onRepostClicked: (Post) -> Unit
 ) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+
+     var posts: List<Post> by Delegates.observable(emptyList()) { _, _, _ ->
+     notifyDataSetChanged()
+     }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = PostListItemBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(posts[position])
+    }
+
+    override fun getItemCount(): Int = posts.size
+
     inner class ViewHolder(
         private val binding: PostListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -23,16 +45,14 @@ internal class PostsAdapter(
             usersViewsCount.text = getTextViewCount(post.views)
             repostsCount.text = getTextViewCount(post.reposts)
             avatar.setImageResource(post.avatar)
-            like.setOnClickListener { viewModel.onLkeClicked(post) }
-            reposts.setOnClickListener { viewModel.onRepostClicked(post) }
+            like.setOnClickListener { onLikeClicked(post) }
+            reposts.setOnClickListener { onRepostClicked(post) }
         }
 
         @DrawableRes
         fun getLikeIconResId(liked: Boolean) =
             if (liked) R.drawable.ic_liked_16 else R.drawable.ic_likes_16
     }
-
-
 }
 
 fun getTextViewCount(count: Int): String {
