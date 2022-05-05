@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
 import ru.netology.nmedia.PostViewModel.PostViewModel
 import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
 
 
@@ -17,27 +18,40 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.data.observe(this) { post ->
-            binding.render(post)
+        viewModel.data.observe(this) { posts ->
+            binding.render(posts)
         }
 
-        binding.postList.like.setOnClickListener {
-            viewModel.onLkeClicked()
-        }
-        binding.postList.reposts.setOnClickListener {
-            viewModel.onRepostClicked()
-        }
+//        binding.postList.like.setOnClickListener {
+//            viewModel.onLkeClicked()
+//        }
+//        binding.postList.reposts.setOnClickListener {
+//            viewModel.onRepostClicked()
+//        }
+//        <include
+//        android:id="@+id/postList"
+//        layout="@layout/post_list_item" />
     }
 
-    private fun ActivityMainBinding.render(post1: Post) {
-        postList.authorName.text = post1.author
-        postList.date.text = post1.published
-        post1.content.also { postList.postBody.text = it }
-        postList.like.setImageResource(getLikeIconResId(post1.likedByMe))
-        postList.likesCount.text = getTextViewCount(post1.likes)
-        postList.usersViewsCount.text = getTextViewCount(post1.views)
-        postList.repostsCount.text = getTextViewCount(post1.reposts)
-        postList.avatar.setImageResource(post1.avatar)
+    private fun ActivityMainBinding.render(posts: List<Post>) {
+        for (post in posts) {
+            val postBinding = PostListItemBinding.inflate(layoutInflater, root, true)
+            postBinding.render(post)
+        }
+
+    }
+
+    private fun PostListItemBinding.render(post: Post) {
+        authorName.text = post.author
+        date.text = post.published
+        post.content.also { postBody.text = it }
+        like.setImageResource(getLikeIconResId(post.likedByMe))
+        likesCount.text = getTextViewCount(post.likes)
+        usersViewsCount.text = getTextViewCount(post.views)
+        repostsCount.text = getTextViewCount(post.reposts)
+        avatar.setImageResource(post.avatar)
+        like.setOnClickListener { viewModel.onLkeClicked(post) }
+        reposts.setOnClickListener { viewModel.onRepostClicked(post) }
     }
 
     @DrawableRes
