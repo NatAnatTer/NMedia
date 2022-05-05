@@ -30,10 +30,10 @@ internal class PostsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(posts[position])
+        holder.bind(getItem(position)) //holder.bind(posts[position])
     }
-
-    override fun getItemCount(): Int = posts.size
+//
+//    override fun getItemCount(): Int = posts.size
 
     inner class ViewHolder(
         private val binding: PostListItemBinding
