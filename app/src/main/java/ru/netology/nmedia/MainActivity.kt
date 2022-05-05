@@ -33,45 +33,34 @@ class MainActivity : AppCompatActivity() {
 //        layout="@layout/post_list_item" />
     }
 
-    private fun ActivityMainBinding.render(posts: List<Post>) {
-        for (post in posts) {
-            PostListItemBinding.inflate(layoutInflater, root, true
-            ).render(post)
-        }
+//    private fun ActivityMainBinding.render(posts: List<Post>) {
+//        for (post in posts) {
+//            PostListItemBinding.inflate(layoutInflater, root, true
+//            ).render(post)
+//        }
+//
+//    }
 
-    }
+//    private fun PostListItemBinding.render(post1: Post) {
+//        authorName.text = post1.author
+//        date.text = post1.published
+//        post1.content.also { postBody.text = it }
+//        like.setImageResource(getLikeIconResId(post1.likedByMe))
+//        likesCount.text = getTextViewCount(post1.likes)
+//        usersViewsCount.text = getTextViewCount(post1.views)
+//        repostsCount.text = getTextViewCount(post1.reposts)
+//        avatar.setImageResource(post1.avatar)
+//      //  like.setOnClickListener { viewModel.onLkeClicked(post) }
+//       // reposts.setOnClickListener { viewModel.onRepostClicked(post) }
+//    }
 
-    private fun PostListItemBinding.render(post1: Post) {
-        authorName.text = post1.author
-        date.text = post1.published
-        post1.content.also { postBody.text = it }
-        like.setImageResource(getLikeIconResId(post1.likedByMe))
-        likesCount.text = getTextViewCount(post1.likes)
-        usersViewsCount.text = getTextViewCount(post1.views)
-        repostsCount.text = getTextViewCount(post1.reposts)
-        avatar.setImageResource(post1.avatar)
-      //  like.setOnClickListener { viewModel.onLkeClicked(post) }
-       // reposts.setOnClickListener { viewModel.onRepostClicked(post) }
-    }
-
-    @DrawableRes
-    fun getLikeIconResId(liked: Boolean) =
-        if (liked) R.drawable.ic_liked_16 else R.drawable.ic_likes_16
+//    @DrawableRes
+//    fun getLikeIconResId(liked: Boolean) =
+//        if (liked) R.drawable.ic_liked_16 else R.drawable.ic_likes_16
 
 }
 
-fun getTextViewCount(count: Int): String {
-    val df1 = DecimalFormat("#.#")
-    return when (count) {
-        in 0..999 -> count.toString()
-        in 1000..1099 -> (count / 1000).toString() + "K"
-        in 1100..9999 -> (df1.format((count / 100).toDouble() / 10.0)).toString() + "K"
-        in 10_000..999_999 -> (count / 1000).toString() + "K"
-        in 1_000_000..1_099_999 -> (count / 1_000_000).toString() + "M"
-        in 1_100_000..999_999_999 -> (df1.format((count / 100_000).toDouble() / 10.0)).toString() + "M"
-        else -> "1B"
-    }
-}
+
 
 
 
