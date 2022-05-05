@@ -12,16 +12,11 @@ import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
 import kotlin.properties.Delegates
 
-
+typealias onPostClicked = (Post) -> Unit
 internal class PostsAdapter(
-    private val onLikeClicked: (Post) -> Unit,
-    private val onRepostClicked: (Post) -> Unit
+    private val onLikeClicked: onPostClicked,
+    private val onRepostClicked: onPostClicked
 ) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) { //RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
-
-     var posts: List<Post> by Delegates.observable(emptyList()) { _, oldItem, newItem ->
-     notifyItemChanged(10)
-     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -30,7 +25,7 @@ internal class PostsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-           holder.bind(getItem(position)) //holder.bind(posts[position])
+        holder.bind(getItem(position)) //holder.bind(posts[position])
     }
 
 //    override fun getItemCount(): Int = posts.size
@@ -40,19 +35,25 @@ internal class PostsAdapter(
         private val binding: PostListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private lateinit var post: Post
 
+        init {
+            binding.like.setOnClickListener { onLikeClicked(post) }
+            binding.reposts.setOnClickListener { onRepostClicked(post) }
+        }
 
-        fun bind(post: Post) = with(binding) {
-            authorName.text = post.author
-            date.text = post.published
-            post.content.also { postBody.text = it }
-            like.setImageResource(getLikeIconResId(post.likedByMe))
-            likesCount.text = getTextViewCount(post.likes)
-            usersViewsCount.text = getTextViewCount(post.views)
-            repostsCount.text = getTextViewCount(post.reposts)
-            avatar.setImageResource(post.avatar)
-            like.setOnClickListener { onLikeClicked(post) }
-            reposts.setOnClickListener { onRepostClicked(post) }
+        fun bind(post: Post) {
+            this.post = post
+            with(binding) {
+                authorName.text = post.author
+                date.text = post.published
+                post.content.also { postBody.text = it }
+                like.setImageResource(getLikeIconResId(post.likedByMe))
+                likesCount.text = getTextViewCount(post.likes)
+                usersViewsCount.text = getTextViewCount(post.views)
+                repostsCount.text = getTextViewCount(post.reposts)
+                avatar.setImageResource(post.avatar)
+            }
         }
 
         @DrawableRes
@@ -60,7 +61,7 @@ internal class PostsAdapter(
             if (liked) R.drawable.ic_liked_16 else R.drawable.ic_likes_16
     }
 
-    private object DiffCallBack: DiffUtil.ItemCallback<Post>(){
+    private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post) =
             oldItem.id == newItem.id
 

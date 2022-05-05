@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
                viewModel::onRepostClicked)
         binding.postRecyclerView.adapter = adapter
         viewModel.data.observe(this) { posts ->
-            adapter.submitList(posts)  // adapter.posts = posts
+            adapter.submitList(posts)
+            //adapter.posts = posts
         }
 
     }
