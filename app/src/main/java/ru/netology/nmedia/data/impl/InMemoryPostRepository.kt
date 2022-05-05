@@ -1,18 +1,14 @@
 package ru.netology.nmedia.data.impl
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.data.PostRepository
 
 class InMemoryPostRepository : PostRepository {
-    private val posts
-        get() = checkNotNull(data.value) {
-            "value should be not null"
-        }
+
     override val data = MutableLiveData(
-        List(10) { index ->
+        List(100) { index ->
             Post(
                 id = index + 1L,
                 author = "Нетология. Университет интернет-профессий будущего",
@@ -26,6 +22,10 @@ class InMemoryPostRepository : PostRepository {
             )
         }
     )
+    private val posts
+        get() = checkNotNull(data.value) {
+            "value should be not null"
+        }
 
     override fun like(postId: Long) {
         data.value = posts.map {
