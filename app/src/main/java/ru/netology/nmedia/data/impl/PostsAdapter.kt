@@ -3,6 +3,8 @@ package ru.netology.nmedia.data.impl
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
@@ -14,10 +16,10 @@ import kotlin.properties.Delegates
 internal class PostsAdapter(
     private val onLikeClicked: (Post) -> Unit,
     private val onRepostClicked: (Post) -> Unit
-) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) { //RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
-     var posts: List<Post> by Delegates.observable(emptyList()) { _, _, _ ->
-     notifyDataSetChanged()
+     var posts: List<Post> by Delegates.observable(emptyList()) { _, oldItem, newItem ->
+     notifyItemChanged(10)
      }
 
 
@@ -52,6 +54,15 @@ internal class PostsAdapter(
         @DrawableRes
         fun getLikeIconResId(liked: Boolean) =
             if (liked) R.drawable.ic_liked_16 else R.drawable.ic_likes_16
+    }
+
+    private object DiffCallBack: DiffUtil.ItemCallback<Post>(){
+        override fun areItemsTheSame(oldItem: Post, newItem: Post) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Post, newItem: Post) =
+            oldItem == newItem
+
     }
 }
 
