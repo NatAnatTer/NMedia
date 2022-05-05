@@ -30,14 +30,18 @@ internal class PostsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position)) //holder.bind(posts[position])
+           holder.bind(getItem(position)) //holder.bind(posts[position])
     }
-//
+
 //    override fun getItemCount(): Int = posts.size
+
 
     inner class ViewHolder(
         private val binding: PostListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+
+
         fun bind(post: Post) = with(binding) {
             authorName.text = post.author
             date.text = post.published
