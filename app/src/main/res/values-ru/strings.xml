@@ -10,4 +10,5 @@
     <string name="post_text_hint">Введите текст</string>
     <string name="description_post_like">Сохранить</string>
     <string name="menu_edit">Редактировать</string>
+    <string name="description_undo_editing">Отмена редактирования</string>
 </resources>

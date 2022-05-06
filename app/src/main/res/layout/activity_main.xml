@@ -49,5 +49,59 @@
         app:layout_constraintStart_toEndOf="@id/contentEditText"
         app:srcCompat="@drawable/ic_baseline_send_24" />
 
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="undoEditingTopBarrier, edit_icon,oldContentEditedText,undoEditButton" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/undoEditingTopBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="contentEditText,saveButton, edit_icon" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/edit_icon"
+        android:layout_width="@dimen/icons_size"
+        android:layout_height="@dimen/icons_size"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/oldContentEditedText"
+        app:layout_constraintBottom_toTopOf="@id/toolsTopBarrier"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/oldContentEditedText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+
+        android:importantForAutofill="no"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:padding="@dimen/common_spacing"
+        app:layout_constraintBottom_toTopOf="@id/toolsTopBarrier"
+        app:layout_constraintEnd_toStartOf="@id/undoEditButton"
+        app:layout_constraintStart_toEndOf="@id/edit_icon"
+        app:layout_constraintTop_toTopOf="@id/toolsTopBarrier"
+            tools:hint="@string/post_text_hint"
+         />
+
+    <ImageButton
+        android:id="@+id/undoEditButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_undo_editing"
+        app:layout_constraintBottom_toTopOf="@id/toolsTopBarrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/oldContentEditedText"
+        app:srcCompat="@drawable/ic_baseline_close_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
