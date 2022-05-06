@@ -7,4 +7,6 @@
     <string name="share">Поделиться</string>
     <string name="views">Просмотры</string>
     <string name="remove">Удалить</string>
+    <string name="post_text_hint">Введите текст</string>
+    <string name="description_post_like">Save</string>
 </resources>

@@ -7,4 +7,6 @@
     <string name="share">Share</string>
     <string name="views">Views</string>
     <string name="remove">remove</string>
+    <string name="post_text_hint">Enter text</string>
+    <string name="description_post_like">Save</string>
 </resources>
