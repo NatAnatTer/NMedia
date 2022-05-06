@@ -1,7 +1,8 @@
-package ru.netology.nmedia.data.impl
+package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,34 +13,48 @@ import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
 import kotlin.properties.Delegates
 
-typealias onPostClicked = (Post) -> Unit
+//typealias onPostClicked = (Post) -> Unit
 internal class PostsAdapter(
-    private val onLikeClicked: onPostClicked,
-    private val onRepostClicked: onPostClicked
-) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) { //RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+//    private val onLikeClicked: onPostClicked,
+//    private val onRepostClicked: onPostClicked
+    private val interactionListener: PostInteractionListener
+) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostListItemBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, interactionListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position)) //holder.bind(posts[position])
+        holder.bind(getItem(position))
     }
-
-//    override fun getItemCount(): Int = posts.size
 
 
     inner class ViewHolder(
-        private val binding: PostListItemBinding
+        private val binding: PostListItemBinding,
+        val listener: PostInteractionListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var post: Post
+        private val popupMenu by lazy {
+            PopupMenu(itemView.context, binding.menu).apply {
+                inflate(R.menu.options_post)
+                setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.remove -> {
+                            listener.onRemoveClicked(post)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }
+        }
 
         init {
-            binding.like.setOnClickListener { onLikeClicked(post) }
-            binding.reposts.setOnClickListener { onRepostClicked(post) }
+            binding.like.setOnClickListener { listener.onLikeClicked(post) }
+            binding.reposts.setOnClickListener { listener.onRepostClicked(post) }
         }
 
         fun bind(post: Post) {
@@ -53,6 +68,7 @@ internal class PostsAdapter(
                 usersViewsCount.text = getTextViewCount(post.views)
                 repostsCount.text = getTextViewCount(post.reposts)
                 avatar.setImageResource(post.avatar)
+                menu.setOnClickListener { popupMenu.show() }
             }
         }
 

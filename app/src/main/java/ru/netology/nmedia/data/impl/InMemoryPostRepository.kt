@@ -45,6 +45,10 @@ class InMemoryPostRepository : PostRepository {
             )
         }
     }
+
+    override fun delete(postId: Long) {
+        data.value = posts.filterNot { it.id ==postId }
+    }
 }
 
 private fun getLikesCount(liked: Boolean, likes: Int): Int {

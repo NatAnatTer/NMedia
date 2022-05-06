@@ -27,7 +27,7 @@
         android:singleLine="true"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/date"
-        app:layout_constraintEnd_toStartOf="@id/option"
+        app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar"
         tools:ignore="MissingConstraints"
@@ -43,7 +43,7 @@
         android:singleLine="true"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
-        app:layout_constraintEnd_toStartOf="@id/option"
+        app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toStartOf="@id/authorName"
         app:layout_constraintTop_toBottomOf="@id/authorName"
 
@@ -52,7 +52,7 @@
         tools:text="28.04.2022" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/option"
+        android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -67,7 +67,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="avatar, date, option" />
+        app:constraint_referenced_ids="avatar, date, menu" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/postBody"

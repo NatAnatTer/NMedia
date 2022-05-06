@@ -10,4 +10,7 @@ interface PostRepository {
     fun like(postId: Long)
 
     fun repost(postId: Long)
+
+    fun delete(postId: Long)
+
 }
