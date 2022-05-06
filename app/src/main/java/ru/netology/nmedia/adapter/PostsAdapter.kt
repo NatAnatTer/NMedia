@@ -46,6 +46,10 @@ internal class PostsAdapter(
                             listener.onRemoveClicked(post)
                             true
                         }
+                        R.id.edit -> {
+                            listener.onEditClicked(post)
+                            true
+                        }
                         else -> false
                     }
                 }
