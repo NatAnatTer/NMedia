@@ -26,8 +26,6 @@ internal class PostsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
-
     inner class ViewHolder(
         private val binding: PostListItemBinding,
         private val listener: PostInteractionListener
@@ -56,7 +54,6 @@ internal class PostsAdapter(
         init {
             binding.like.setOnClickListener { listener.onLikeClicked(post) }
             binding.reposts.setOnClickListener { listener.onRepostClicked(post) }
-
         }
 
         fun bind(post: Post) {

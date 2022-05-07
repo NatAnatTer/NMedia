@@ -11,7 +11,7 @@ import ru.netology.nmedia.data.impl.InMemoryPostRepository
 class PostViewModel : ViewModel(), PostInteractionListener {
     private val repository: PostRepository = InMemoryPostRepository()
     val data by repository::data
-    var currentPost = MutableLiveData<Post?>(null)
+    val currentPost = MutableLiveData<Post?>(null)
 
 
     override fun onLikeClicked(post: Post) = repository.like(post.id)
@@ -19,8 +19,11 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onRemoveClicked(post: Post) = repository.delete(post.id)
     override fun onEditClicked(post: Post) {
         currentPost.value = post
-
     }
+    override fun onUndoEditClicked(post: Post){
+        currentPost.value = null
+    }
+
 
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) return
