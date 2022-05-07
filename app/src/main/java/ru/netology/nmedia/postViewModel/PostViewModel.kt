@@ -19,6 +19,12 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onRemoveClicked(post: Post) = repository.delete(post.id)
     override fun onEditClicked(post: Post) {
         currentPost.value = post
+
+    }
+
+    override fun onUndoEditClicked(post: Post) {
+       // currentPost.value = post
+      //  group.visibility = View.VISIBLE
     }
 
     fun onSaveButtonClicked(content: String) {
@@ -36,6 +42,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         repository.save(newPost)
         currentPost.value = null
     }
+
 
 
 

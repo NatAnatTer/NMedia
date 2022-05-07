@@ -2,6 +2,7 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import ru.netology.nmedia.postViewModel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         binding.postRecyclerView.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
-            //adapter.posts = posts
         }
         binding.saveButton.setOnClickListener {
             with(binding.contentEditText) {
@@ -30,11 +30,14 @@ class MainActivity : AppCompatActivity() {
                 clearFocus()
                 hideKeyboard()
             }
+            binding.group.visibility = View.GONE
         }
         viewModel.currentPost.observe(this){currentPost ->
             binding.contentEditText.setText(currentPost?.content)
-
+            binding.group.visibility = View.VISIBLE
         }
+
+       // binding.undoEditButton.setOnClickListener {  }
     }
 }
 

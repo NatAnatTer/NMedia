@@ -11,4 +11,5 @@
     <string name="description_post_like">Save</string>
     <string name="menu_edit">Edit</string>
     <string name="description_undo_editing">Undo editing</string>
+    <string name="edit_header">Editing</string>
 </resources>

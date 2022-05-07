@@ -11,7 +11,7 @@ import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
-import kotlin.properties.Delegates
+
 
 //typealias onPostClicked = (Post) -> Unit
 internal class PostsAdapter(
@@ -33,7 +33,7 @@ internal class PostsAdapter(
 
     inner class ViewHolder(
         private val binding: PostListItemBinding,
-        val listener: PostInteractionListener
+        private val listener: PostInteractionListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var post: Post
@@ -59,6 +59,7 @@ internal class PostsAdapter(
         init {
             binding.like.setOnClickListener { listener.onLikeClicked(post) }
             binding.reposts.setOnClickListener { listener.onRepostClicked(post) }
+
         }
 
         fun bind(post: Post) {
@@ -73,6 +74,7 @@ internal class PostsAdapter(
                 repostsCount.text = getTextViewCount(post.reposts)
                 avatar.setImageResource(post.avatar)
                 menu.setOnClickListener { popupMenu.show() }
+
             }
         }
 
