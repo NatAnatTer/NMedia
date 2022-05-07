@@ -13,10 +13,7 @@ import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
 
 
-//typealias onPostClicked = (Post) -> Unit
 internal class PostsAdapter(
-//    private val onLikeClicked: onPostClicked,
-//    private val onRepostClicked: onPostClicked
     private val interactionListener: PostInteractionListener
 ) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) {
 

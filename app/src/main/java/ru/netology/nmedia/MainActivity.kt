@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.flow.callbackFlow
 import ru.netology.nmedia.postViewModel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -27,19 +31,40 @@ class MainActivity : AppCompatActivity() {
             with(binding.contentEditText) {
                 val content = text.toString()
                 viewModel.onSaveButtonClicked(content)
+                text = null
                 clearFocus()
                 hideKeyboard()
             }
             binding.group.visibility = View.GONE
         }
-        viewModel.currentPost.observe(this){currentPost ->
+        binding.group.visibility = View.GONE
+
+        viewModel.currentPost.observe(this) { currentPost ->
+            if (currentPost != null) {
+                binding.group.visibility = View.VISIBLE
+                binding.oldContentEditedText.text = currentPost.content
+                binding.contentEditText.setText(currentPost.content)
+
+                binding.undoEditButton.setOnClickListener {
+                    binding.contentEditText.text = null
+viewModel.currentPost = MutableLiveData(null)
+
+                    binding.group.visibility = View.GONE
+                    binding.contentEditText.clearFocus()
+                    binding.contentEditText.hideKeyboard()
+                }
+            }
+
             binding.contentEditText.setText(currentPost?.content)
-            binding.group.visibility = View.VISIBLE
+
         }
 
-       // binding.undoEditButton.setOnClickListener {  }
     }
 }
+
+
+
+
 
 
 
