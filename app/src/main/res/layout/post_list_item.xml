@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
 
 
     <ImageView
@@ -86,30 +85,20 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="postBody" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/like"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top"
-        android:background="@android:color/transparent"
+        android:button="@drawable/ic_like_24dp"
         android:contentDescription="@string/likes"
-        android:src="@drawable/ic_likes_16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/body_barrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/likes_count"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="@dimen/margin_top"
-
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/like"
         app:layout_constraintTop_toBottomOf="@id/body_barrier"
-        tools:ignore="MissingConstraints,SmallSp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:text="1k" />
+        tools:text="10700"
+        />
+
+
+
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/reposts"
@@ -120,7 +109,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/share"
         android:src="@drawable/ic_share_24"
-        app:layout_constraintStart_toEndOf="@id/likes_count"
+        app:layout_constraintStart_toEndOf="@id/like"
         app:layout_constraintTop_toBottomOf="@id/body_barrier" />
 
     <androidx.appcompat.widget.AppCompatTextView

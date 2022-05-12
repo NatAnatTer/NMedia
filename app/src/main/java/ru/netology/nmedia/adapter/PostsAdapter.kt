@@ -3,7 +3,6 @@ package ru.netology.nmedia.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -54,7 +53,8 @@ internal class PostsAdapter(
         init {
             binding.like.setOnClickListener { listener.onLikeClicked(post) }
             binding.reposts.setOnClickListener { listener.onRepostClicked(post) }
-        }
+            binding.menu.setOnClickListener { popupMenu.show()}
+            }
 
         fun bind(post: Post) {
             this.post = post
@@ -62,19 +62,19 @@ internal class PostsAdapter(
                 authorName.text = post.author
                 date.text = post.published
                 post.content.also { postBody.text = it }
-                like.setImageResource(getLikeIconResId(post.likedByMe))
-                likesCount.text = getTextViewCount(post.likes)
+               // like.setButtonDrawable(getLikeIconResId(post.likedByMe))
+                like.text = getTextViewCount(post.likes)
+                like.isChecked = post.likedByMe
                 usersViewsCount.text = getTextViewCount(post.views)
                 repostsCount.text = getTextViewCount(post.reposts)
                 avatar.setImageResource(post.avatar)
-                menu.setOnClickListener { popupMenu.show() }
 
             }
         }
 
-        @DrawableRes
-        fun getLikeIconResId(liked: Boolean) =
-            if (liked) R.drawable.ic_liked_16 else R.drawable.ic_likes_16
+//        @DrawableRes
+//        fun getLikeIconResId(liked: Boolean) =
+//            if (liked) R.drawable.ic_liked_24 else R.drawable.ic_likes_24
     }
 
     private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
