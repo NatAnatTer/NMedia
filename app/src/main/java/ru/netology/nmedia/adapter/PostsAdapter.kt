@@ -65,8 +65,8 @@ internal class PostsAdapter(
                // like.setButtonDrawable(getLikeIconResId(post.likedByMe))
                 like.text = getTextViewCount(post.likes)
                 like.isChecked = post.likedByMe
-                usersViewsCount.text = getTextViewCount(post.views)
-                repostsCount.text = getTextViewCount(post.reposts)
+                usersViews.text = getTextViewCount(post.views)
+                reposts.text = getTextViewCount(post.reposts)
                 avatar.setImageResource(post.avatar)
 
             }
@@ -99,3 +99,67 @@ fun getTextViewCount(count: Int): String {
         else -> "1B"
     }
 }
+
+//<androidx.appcompat.widget.AppCompatImageButton
+//android:id="@+id/users_views"
+//android:layout_width="wrap_content"
+//android:layout_height="wrap_content"
+//android:layout_marginTop="@dimen/margin_top"
+//android:layout_marginEnd="4dp"
+//android:background="@android:color/transparent"
+//android:contentDescription="@string/views"
+//android:src="@drawable/ic_views_16"
+//app:layout_constraintEnd_toStartOf="@id/users_views_count"
+//app:layout_constraintTop_toBottomOf="@id/body_barrier" />
+//
+//<androidx.appcompat.widget.AppCompatTextView
+//android:id="@+id/users_views_count"
+//android:layout_width="wrap_content"
+//android:layout_height="wrap_content"
+//android:layout_marginTop="@dimen/margin_top"
+//android:ellipsize="end"
+//android:singleLine="true"
+//android:textSize="14sp"
+//app:layout_constraintEnd_toEndOf="parent"
+//app:layout_constraintTop_toBottomOf="@id/body_barrier"
+//tools:ignore="MissingConstraints,SmallSp"
+//tools:layout_editor_absoluteX="16dp"
+//tools:text="5324" />
+
+
+//<androidx.appcompat.widget.AppCompatImageButton
+//android:id="@+id/reposts"
+//android:layout_width="0dp"
+//android:layout_height="wrap_content"
+//android:layout_marginStart="16dp"
+//android:layout_marginTop="@dimen/margin_top"
+//android:background="@android:color/transparent"
+//android:contentDescription="@string/share"
+//android:src="@drawable/ic_share_24"
+//app:layout_constraintStart_toEndOf="@id/like"
+//app:layout_constraintTop_toBottomOf="@id/body_barrier" />
+//
+//<androidx.appcompat.widget.AppCompatTextView
+//android:id="@+id/reposts_count"
+//android:layout_width="0dp"
+//android:layout_height="wrap_content"
+//android:layout_marginStart="4dp"
+//android:layout_marginTop="@dimen/margin_top"
+//
+//android:textSize="14sp"
+//app:layout_constraintStart_toEndOf="@id/reposts"
+//app:layout_constraintTop_toBottomOf="@id/body_barrier"
+//tools:ignore="MissingConstraints,SmallSp"
+//tools:layout_editor_absoluteX="16dp"
+//tools:text="5" />
+//<com.google.android.material.button.MaterialButton
+//android:id="@+id/like"
+//style="@style/Widget.AppTheme.LikeCheckbox"
+//android:layout_width="wrap_content"
+//android:layout_height="wrap_content"
+//android:checkable="true"
+//android:contentDescription="@string/likes"
+//app:layout_constraintStart_toStartOf="parent"
+//app:layout_constraintTop_toBottomOf="@id/body_barrier"
+//tools:text="10700"
+///>

@@ -76,7 +76,7 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/header_barrier"
         tools:ignore="MissingConstraints,SmallSp"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="text" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/body_barrier"
@@ -85,71 +85,38 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="postBody" />
 
-
-    <com.google.android.material.checkbox.MaterialCheckBox
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
+        style="@style/Widget.AppTheme.LikeCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:button="@drawable/ic_like_24dp"
+        android:checkable="true"
         android:contentDescription="@string/likes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/body_barrier"
-        tools:text="10700"
-        />
+        tools:text="10700" />
 
-
-
-
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/reposts"
-        android:layout_width="0dp"
+        style="@style/Widget.AppTheme.Repost"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/margin_top"
-        android:background="@android:color/transparent"
         android:contentDescription="@string/share"
-        android:src="@drawable/ic_share_24"
-        app:layout_constraintStart_toEndOf="@id/like"
-        app:layout_constraintTop_toBottomOf="@id/body_barrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/reposts_count"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="@dimen/margin_top"
-
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/reposts"
+        app:layout_constraintStart_toEndOf="@+id/like"
         app:layout_constraintTop_toBottomOf="@id/body_barrier"
-        tools:ignore="MissingConstraints,SmallSp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:text="5" />
+        tools:text="10700" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/users_views"
+        style="@style/Widget.AppTheme.View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top"
-        android:layout_marginEnd="4dp"
-        android:background="@android:color/transparent"
+        android:checkable="false"
         android:contentDescription="@string/views"
-        android:src="@drawable/ic_views_16"
-        app:layout_constraintEnd_toStartOf="@id/users_views_count"
-        app:layout_constraintTop_toBottomOf="@id/body_barrier" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/users_views_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/body_barrier"
-        tools:ignore="MissingConstraints,SmallSp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:text="5324" />
+        tools:text="10700" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
