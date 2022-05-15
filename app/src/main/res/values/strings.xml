@@ -12,4 +12,5 @@
     <string name="menu_edit">Edit</string>
     <string name="description_undo_editing">Undo editing</string>
     <string name="edit_header">Editing</string>
+    <string name="chooser_share_post">Share post</string>
 </resources>
