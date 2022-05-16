@@ -13,4 +13,6 @@
     <string name="description_undo_editing">Undo editing</string>
     <string name="edit_header">Editing</string>
     <string name="chooser_share_post">Share post</string>
+    <string name="description_post_save">Save</string>
+    <string name="add_post">Add new post</string>
 </resources>
