@@ -21,6 +21,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         navigateToPostContentScreenEvent.call()
     }
 
+
     override fun onLikeClicked(post: Post) = repository.like(post.id)
     override fun onRepostClicked(post: Post) {
         sharePostContent.value = post.content

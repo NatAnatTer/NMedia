@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
+
         binding.fab.setOnClickListener {
             viewModel.onAddButtonClicked()
         }
@@ -69,6 +70,8 @@ class MainActivity : AppCompatActivity() {
             val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
             startActivity(shareIntent)
         }
+
+
         val postContentActivityLauncher =
             registerForActivityResult(PostContentActivity.ResultContract) { postContent ->
                 postContent ?: return@registerForActivityResult

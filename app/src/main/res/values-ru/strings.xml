@@ -15,4 +15,5 @@
     <string name="chooser_share_post">Поделиться</string>
     <string name="description_post_save">Сохранить</string>
     <string name="add_post">Создать новый пост</string>
+    <string name="back">come back from create post</string>
 </resources>
