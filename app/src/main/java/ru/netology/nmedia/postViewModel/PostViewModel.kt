@@ -12,9 +12,14 @@ import ru.netology.nmedia.util.SingleLiveEvent
 class PostViewModel : ViewModel(), PostInteractionListener {
     private val repository: PostRepository = InMemoryPostRepository()
     val data by repository::data
-    val currentPost = MutableLiveData<Post?>(null)
+    private val currentPost = MutableLiveData<Post?>(null)
 
     val sharePostContent = SingleLiveEvent<String>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
+
+    fun onAddButtonClicked() {
+        navigateToPostContentScreenEvent.call()
+    }
 
     override fun onLikeClicked(post: Post) = repository.like(post.id)
     override fun onRepostClicked(post: Post) {

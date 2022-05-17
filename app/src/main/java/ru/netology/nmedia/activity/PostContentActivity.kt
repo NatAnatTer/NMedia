@@ -16,7 +16,7 @@ class PostContentActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.edit.requestFocus()
         val text = binding.edit.text
-        binding.edit.setOnClickListener {
+        binding.ok.setOnClickListener {
             val intent = Intent()
             if (text.isNullOrBlank()) {
                 setResult(Activity.RESULT_CANCELED, intent)
@@ -31,7 +31,7 @@ class PostContentActivity : AppCompatActivity() {
 
     }
 
-    class ResultContract: ActivityResultContract<Unit, String?>(){
+    object ResultContract: ActivityResultContract<Unit, String?>(){
         override fun createIntent(context: Context, input: Unit) = Intent(context, PostContentActivity::class.java)
 
         override fun parseResult(resultCode: Int, intent: Intent?) =

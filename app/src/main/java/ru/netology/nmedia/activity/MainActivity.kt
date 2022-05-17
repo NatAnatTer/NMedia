@@ -3,13 +3,14 @@ package ru.netology.nmedia.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import ru.netology.nmedia.R
 import ru.netology.nmedia.postViewModel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.util.hideKeyboard
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener {
             viewModel.onAddButtonClicked()
         }
+
 
 //        binding.saveButton.setOnClickListener {
 //            with(binding.contentEditText) {
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 //            binding.contentEditText.setText(currentPost?.content)
 //        }
 
-        viewModel.sharePostContent.observe(this){postContent ->
+        viewModel.sharePostContent.observe(this) { postContent ->
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, postContent)
@@ -67,12 +69,18 @@ class MainActivity : AppCompatActivity() {
             val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
             startActivity(shareIntent)
         }
+        val postContentActivityLauncher =
+            registerForActivityResult(PostContentActivity.ResultContract) { postContent ->
+                postContent ?: return@registerForActivityResult
+                viewModel.onSaveButtonClicked(postContent)
+
+            }
+        viewModel.navigateToPostContentScreenEvent.observe(this) {
+            postContentActivityLauncher.launch()
+        }
 
     }
 }
-
-
-
 
 
 //<androidx.constraintlayout.widget.Barrier
