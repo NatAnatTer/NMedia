@@ -18,4 +18,5 @@
     <string name="back">come back from create post</string>
     <string name="headerTextEdit">Редктирование</string>
     <string name="headerTextCreate">Создание</string>
+    <string name="videoAttachment">Video</string>
 </resources>

@@ -10,6 +10,10 @@ data class Post(
     val likedByMe: Boolean = false,
     val views: Int = 0,
     val reposts: Int = 0,
-    val avatar: Int
+    val avatar: Int,
+    val videoAttachmentCover: Int?,
+    val videoAttachmentHeader: String?
 )
+
+
 

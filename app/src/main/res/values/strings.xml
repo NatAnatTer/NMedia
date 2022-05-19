@@ -18,5 +18,6 @@
     <string name="back">come back from create post</string>
     <string name="headerTextEdit">Edit post</string>
     <string name="headerTextCreate">Create post</string>
+    <string name="videoAttachment">Video</string>
 
 </resources>
