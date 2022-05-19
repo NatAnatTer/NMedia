@@ -1,5 +1,6 @@
 package ru.netology.nmedia.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.R
+import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
 
@@ -25,6 +27,7 @@ internal class PostsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
     inner class ViewHolder(
         private val binding: PostListItemBinding,
         private val listener: PostInteractionListener
@@ -53,8 +56,9 @@ internal class PostsAdapter(
         init {
             binding.like.setOnClickListener { listener.onLikeClicked(post) }
             binding.reposts.setOnClickListener { listener.onRepostClicked(post) }
-            binding.menu.setOnClickListener { popupMenu.show()}
-            }
+            binding.menu.setOnClickListener { popupMenu.show() }
+        }
+
 
         fun bind(post: Post) {
             this.post = post
@@ -62,7 +66,7 @@ internal class PostsAdapter(
                 authorName.text = post.author
                 date.text = post.published
                 post.content.also { postBody.text = it }
-                              like.text = getTextViewCount(post.likes)
+                like.text = getTextViewCount(post.likes)
                 like.isChecked = post.likedByMe
                 usersViews.text = getTextViewCount(post.views)
                 reposts.text = getTextViewCount(post.reposts)

@@ -16,4 +16,7 @@
     <string name="description_post_save">Save</string>
     <string name="add_post">Add new post</string>
     <string name="back">come back from create post</string>
+    <string name="headerTextEdit">Edit post</string>
+    <string name="headerTextCreate">Create post</string>
+
 </resources>

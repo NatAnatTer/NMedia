@@ -16,6 +16,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
+    val navigateToPostContentEditEvent = SingleLiveEvent<Post>()
 
     fun onAddButtonClicked() {
         navigateToPostContentScreenEvent.call()
@@ -31,10 +32,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onRemoveClicked(post: Post) = repository.delete(post.id)
     override fun onEditClicked(post: Post) {
         currentPost.value = post
-    }
-
-    override fun onUndoEditClicked(post: Post) {
-        currentPost.value = null
+        navigateToPostContentEditEvent.value = currentPost.value
     }
 
 
