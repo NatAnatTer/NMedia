@@ -46,7 +46,9 @@ class PostViewModel : ViewModel(), PostInteractionListener {
             author = "Me",
             content = content,
             published = "Now",
-            avatar = R.drawable.ic_new_avatar_48
+            avatar = R.drawable.ic_new_avatar_48,
+            videoAttachmentCover = null,
+            videoAttachmentHeader = null
         )
         repository.save(newPost)
         currentPost.value = null

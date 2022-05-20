@@ -73,21 +73,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:textIsSelectable="true"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/header_barrier"
         tools:ignore="MissingConstraints,SmallSp"
-        tools:text="text" />
+        tools:text="text http://google.com" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/video_preview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="256dp"
-        tools:srcCompat="@drawable/videoCover"
         android:contentDescription="@string/videoAttachment"
+        android:scaleType="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_tobottomOf="postBody"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/postBody" />
 
-        />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/video_preview_button_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/videoAttachment"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_play_arrow_48"
+        app:layout_constraintBottom_toBottomOf="@id/video_preview"
+        app:layout_constraintEnd_toEndOf="@id/video_preview"
+        app:layout_constraintStart_toStartOf="@id/video_preview"
+        app:layout_constraintTop_toTopOf="@id/video_preview"
+        tools:srcCompat="@drawable/ic_baseline_play_arrow_48" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/video_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingBottom="@dimen/margin_top"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/video_preview"
+
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:text="Нетология. Университет интернет-профессий Нетология. Университет интернет-профессий Нетология. Университет интернет-профессий" />
 
 
     <androidx.constraintlayout.widget.Barrier
@@ -95,7 +127,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="video_preview" />
+        app:constraint_referenced_ids="video_title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"

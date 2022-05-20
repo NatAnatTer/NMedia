@@ -71,6 +71,8 @@ internal class PostsAdapter(
                 usersViews.text = getTextViewCount(post.views)
                 reposts.text = getTextViewCount(post.reposts)
                 avatar.setImageResource(post.avatar)
+                post.videoAttachmentCover?.let { videoPreview.setImageResource(it) }
+                post.videoAttachmentHeader?.let { videoTitle.text = it }
 
             }
         }
