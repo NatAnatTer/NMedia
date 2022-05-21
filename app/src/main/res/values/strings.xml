@@ -19,5 +19,6 @@
     <string name="headerTextEdit">Edit post</string>
     <string name="headerTextCreate">Create post</string>
     <string name="videoAttachment">Video</string>
+    <string name="chooser_play_video">Play video</string>
 
 </resources>

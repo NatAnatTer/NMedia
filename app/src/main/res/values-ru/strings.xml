@@ -18,5 +18,6 @@
     <string name="back">come back from create post</string>
     <string name="headerTextEdit">Редктирование</string>
     <string name="headerTextCreate">Создание</string>
-    <string name="videoAttachment">Video</string>
+    <string name="videoAttachment">Видео</string>
+    <string name="chooser_play_video">Воспроизвести видео</string>
 </resources>

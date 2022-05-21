@@ -15,7 +15,7 @@ class InMemoryPostRepository : PostRepository {
             Post(
                 id = index + 1L,
                 author = "Нетология. Университет интернет-профессий будущего",
-                content = "$index Привет, это новая Нетология! Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+                content = "$index Привет, это новая Нетология! Наша миссия — помочь встать на путь роста и начать цепочку перемен → https://www.youtube.com/watch?v=WhWc3b3KhnY",
                 published = "05.05.2022",
                 likedByMe = false,
                 likes = 1099,
@@ -23,7 +23,8 @@ class InMemoryPostRepository : PostRepository {
                 views = 1000,
                 avatar = R.drawable.ic_netology,
                 videoAttachmentCover = R.drawable.cat,
-                videoAttachmentHeader = "New video about my beautiful kat"
+                videoAttachmentHeader = "New video about my beautiful kat",
+                urlVideo = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
             )
         }
     )

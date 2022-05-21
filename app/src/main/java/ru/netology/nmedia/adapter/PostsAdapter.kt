@@ -2,6 +2,7 @@ package ru.netology.nmedia.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -57,6 +58,8 @@ internal class PostsAdapter(
             binding.like.setOnClickListener { listener.onLikeClicked(post) }
             binding.reposts.setOnClickListener { listener.onRepostClicked(post) }
             binding.menu.setOnClickListener { popupMenu.show() }
+            binding.videoPreview.setOnClickListener { listener.onPlayVideoClicked(post) }
+            binding.videoPreviewButtonPlay.setOnClickListener { listener.onPlayVideoClicked(post) }
         }
 
 
@@ -71,8 +74,14 @@ internal class PostsAdapter(
                 usersViews.text = getTextViewCount(post.views)
                 reposts.text = getTextViewCount(post.reposts)
                 avatar.setImageResource(post.avatar)
-                post.videoAttachmentCover?.let { videoPreview.setImageResource(it) }
-                post.videoAttachmentHeader?.let { videoTitle.text = it }
+                if(post.videoAttachmentCover != null) {
+                    videoPreview.setImageResource(post.videoAttachmentCover)
+                    videoTitle.text = post.videoAttachmentHeader
+                } else {
+                    videoPreview.visibility = View.GONE
+                    videoTitle.visibility = View.GONE
+                    videoPreviewButtonPlay.visibility = View.GONE
+                }
 
             }
         }

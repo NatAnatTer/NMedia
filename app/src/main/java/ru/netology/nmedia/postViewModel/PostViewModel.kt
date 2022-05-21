@@ -15,6 +15,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     private val currentPost = MutableLiveData<Post?>(null)
 
     val sharePostContent = SingleLiveEvent<String>()
+    val videoLinkPlay = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
     val navigateToPostContentEditEvent = SingleLiveEvent<Post>()
 
@@ -35,6 +36,10 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         navigateToPostContentEditEvent.value = currentPost.value
     }
 
+    override fun onPlayVideoClicked(post: Post) {
+        videoLinkPlay.value = post.urlVideo!!
+           }
+
 
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) return
@@ -48,7 +53,8 @@ class PostViewModel : ViewModel(), PostInteractionListener {
             published = "Now",
             avatar = R.drawable.ic_new_avatar_48,
             videoAttachmentCover = null,
-            videoAttachmentHeader = null
+            videoAttachmentHeader = null,
+            urlVideo = null
         )
         repository.save(newPost)
         currentPost.value = null

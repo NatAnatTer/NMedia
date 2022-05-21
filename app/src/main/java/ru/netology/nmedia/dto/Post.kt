@@ -1,5 +1,7 @@
 package ru.netology.nmedia.dto
 
+import android.net.Uri
+
 
 data class Post(
     val id: Long,
@@ -12,7 +14,8 @@ data class Post(
     val reposts: Int = 0,
     val avatar: Int,
     val videoAttachmentCover: Int?,
-    val videoAttachmentHeader: String?
+    val videoAttachmentHeader: String?,
+    val urlVideo: String?
 )
 
 
