@@ -18,9 +18,11 @@ class SharedPrefsPostRepository(
 ) : PostRepository {
 
    // val prefs = application.getSharedPreferences("repo", Context.MODE_PRIVATE)
-    val prefs: SharedPreferences = application.getSharedPreferences("repo", Context.MODE_PRIVATE)
-    private var nextId: Long by Delegates.observable(prefs.getLong(NEXT_ID_PREFS_KEYS, 0L)){
-        _, _, newValue ->
+   private val prefs: SharedPreferences = application.getSharedPreferences("repo", Context.MODE_PRIVATE)
+
+  //  private var nextId: Long = 0L+1
+    private var nextId: Long by Delegates.observable(prefs.getLong(NEXT_ID_PREFS_KEYS, 0L))
+  {_, _, newValue ->
         prefs.edit {
             putLong(NEXT_ID_PREFS_KEYS, newValue)
         }
@@ -105,9 +107,9 @@ class SharedPrefsPostRepository(
     }
 
     private companion object {
-        const val GENERATED_POST_AMOUNT = 3
+     //   const val GENERATED_POST_AMOUNT = 3
         const val POSTS_PREFS_KEYS = "posts"
-        const val NEXT_ID_PREFS_KEYS = "posts"
+        const val NEXT_ID_PREFS_KEYS = "nextId"
     }
 }
 
