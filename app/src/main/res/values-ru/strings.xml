@@ -2,4 +2,22 @@
 <resources>
     <string name="app_name">НМедиа</string>
     <string name="nmedia">НМедиа!</string>
+    <string name="post_avatar">"Фото "</string>
+    <string name="likes">Нравится</string>
+    <string name="share">Поделиться</string>
+    <string name="views">Просмотры</string>
+    <string name="remove">Удалить</string>
+    <string name="post_text_hint">Введите текст</string>
+    <string name="description_post_like">Сохранить</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="description_undo_editing">Отмена редактирования</string>
+    <string name="edit_header">Редактирование</string>
+    <string name="chooser_share_post">Поделиться</string>
+    <string name="description_post_save">Сохранить</string>
+    <string name="add_post">Создать новый пост</string>
+    <string name="back">come back from create post</string>
+    <string name="headerTextEdit">Редктирование</string>
+    <string name="headerTextCreate">Создание</string>
+    <string name="videoAttachment">Видео</string>
+    <string name="chooser_play_video">Воспроизвести видео</string>
 </resources>
