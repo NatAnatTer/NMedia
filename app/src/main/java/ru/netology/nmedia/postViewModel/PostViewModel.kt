@@ -8,12 +8,14 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
+import ru.netology.nmedia.data.impl.FilePostRepository
 import ru.netology.nmedia.data.impl.SharedPrefsPostRepository
 import ru.netology.nmedia.util.SingleLiveEvent
 
 class PostViewModel(application: Application): AndroidViewModel(application), PostInteractionListener {
    // private val repository: PostRepository = InMemoryPostRepository()
-   private val repository: PostRepository = SharedPrefsPostRepository(application)
+  // private val repository: PostRepository = SharedPrefsPostRepository(application)
+   private val repository: PostRepository = FilePostRepository(application)
     val data by repository::data
     private val currentPost = MutableLiveData<Post?>(null)
 
