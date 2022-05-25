@@ -74,9 +74,12 @@ internal class PostsAdapter(
                 usersViews.text = getTextViewCount(post.views)
                 reposts.text = getTextViewCount(post.reposts)
                 avatar.setImageResource(post.avatar)
-                if(post.videoAttachmentCover != null) {
+                if (post.videoAttachmentCover != null) {
                     videoPreview.setImageResource(post.videoAttachmentCover)
                     videoTitle.text = post.videoAttachmentHeader
+                    videoPreview.visibility = View.VISIBLE
+                    videoTitle.visibility = View.VISIBLE
+                    videoPreviewButtonPlay.visibility = View.VISIBLE
                 } else {
                     videoPreview.visibility = View.GONE
                     videoTitle.visibility = View.GONE

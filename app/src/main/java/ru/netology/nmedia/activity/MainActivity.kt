@@ -6,12 +6,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+
 import ru.netology.nmedia.R
 import ru.netology.nmedia.postViewModel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-
-
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<PostViewModel>()
@@ -22,6 +21,17 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        run{
+//            val preferences = getPreferences(Context.MODE_PRIVATE)
+//            preferences.edit {
+//                putString("key", "value")
+//            }
+//        }
+//        run{
+//            val preferences = getPreferences(Context.MODE_PRIVATE)
+//            val value = preferences.getString("key", "no value") ?: return@run
+//            Snackbar.make(binding.root, value, Snackbar.LENGTH_INDEFINITE).show()
+//        }
 
         val adapter = PostsAdapter(viewModel)
         binding.postRecyclerView.adapter = adapter
@@ -70,3 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
+
+//<action android:name="android.intent.action.VIEW" />
+//<data android:scheme="*" />

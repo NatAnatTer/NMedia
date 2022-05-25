@@ -1,8 +1,9 @@
 package ru.netology.nmedia.dto
 
-import android.net.Uri
 
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Post(
     val id: Long,
     val author: String,
