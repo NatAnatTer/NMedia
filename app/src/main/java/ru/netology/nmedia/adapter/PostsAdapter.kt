@@ -1,6 +1,5 @@
 package ru.netology.nmedia.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.R
-import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
 
