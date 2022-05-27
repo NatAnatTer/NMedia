@@ -11,13 +11,15 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
-import ru.netology.nmedia.databinding.PostContentActivityBinding
+import ru.netology.nmedia.databinding.FeedFragmentBinding
+import ru.netology.nmedia.databinding.PostContentFragmentBinding
+
+//import ru.netology.nmedia.databinding.PostContentActivityBinding
 
 
-class PostContentFragment(
-    private val initialContent: String
-) : Fragment() {
+class PostContentFragment : Fragment() {
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -26,11 +28,14 @@ class PostContentFragment(
 //
 //    }
 
+    private val initialContent
+        get() = requireArguments().getString(INITIAL_CONTENT_ARGUMENT_KEY)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = PostContentActivityBinding.inflate(layoutInflater).also { binding ->
+    ) = PostContentFragmentBinding.inflate(layoutInflater).also { binding ->
 
         binding.edit.setText(initialContent)
         binding.edit.requestFocus()
@@ -55,7 +60,7 @@ class PostContentFragment(
 
     }.root
 
-    private fun onOkButtonClicked(binding: PostContentActivityBinding) {
+    private fun onOkButtonClicked(binding: PostContentFragmentBinding) {
         val text = binding.edit.text
         if (!text.isNullOrBlank()) {
             val resultBundle = Bundle(1)
@@ -63,7 +68,8 @@ class PostContentFragment(
             resultBundle.putString(RESULT_KEY, content)
             setFragmentResult(REQUEST_KEY, resultBundle)
         }
-        parentFragmentManager.popBackStack()
+        //parentFragmentManager.popBackStack()
+        findNavController().popBackStack()
     }
 
 //    object ResultContract : ActivityResultContract<String?, String?>() {
@@ -79,8 +85,16 @@ class PostContentFragment(
 //    }
 
     companion object {
+        private const val INITIAL_CONTENT_ARGUMENT_KEY = "initialContent"
         const val RESULT_KEY = "postNewContent"
         const val POST_BODY_TEXT = "Post body"
         const val REQUEST_KEY = "requestKey"
+        fun create(initialContent: String?) = PostContentFragment().apply {
+            arguments = createBundle(initialContent)
+        }
+
+        fun createBundle(initialContent: String?) = Bundle(1).apply {
+            putString(INITIAL_CONTENT_ARGUMENT_KEY, initialContent)
+        }
     }
 }

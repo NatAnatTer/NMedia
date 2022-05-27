@@ -7,10 +7,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.*
+import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import ru.netology.nmedia.postViewModel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
-import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.databinding.FeedFragmentBinding
+
+//import ru.netology.nmedia.databinding.ActivityMainBinding
 
 class FeedFragment : Fragment() {
 
@@ -52,10 +55,10 @@ class FeedFragment : Fragment() {
             startActivity(openVideoIntent)
         }
 
-        setFragmentResultListener(requestKey = PostContentFragment.REQUEST_KEY) {
-    requestKey, bundle ->
-            if(requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
-            val newPostContent = bundle.getString(PostContentFragment.RESULT_KEY) ?: return@setFragmentResultListener
+        setFragmentResultListener(requestKey = PostContentFragment.REQUEST_KEY) { requestKey, bundle ->
+            if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
+            val newPostContent =
+                bundle.getString(PostContentFragment.RESULT_KEY) ?: return@setFragmentResultListener
             viewModel.onSaveButtonClicked(newPostContent)
         }
 
@@ -67,24 +70,31 @@ class FeedFragment : Fragment() {
 //
 //            }
 
-        viewModel.navigateToPostContentScreenEvent.observe(this) {
+        viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
             //postContentActivityLauncher.launch(null)
-            parentFragmentManager.commit {
-                replace(R.id.fragment_container, PostContentFragment())
-                addToBackStack(null)
-            }
+
+            findNavController().navigate(
+                R.id.to_postContentFragment,
+                PostContentFragment.createBundle(initialContent)
+            )
+//            parentFragmentManager.commit {
+//                val fragment = PostContentFragment.create(initialContent)
+//                replace(R.id.fragment_container, fragment)
+//                addToBackStack(null)
+//            }
         }
-        viewModel.navigateToPostContentEditEvent.observe(this) {
-            if (it != null) {
-                parentFragmentManager.commit {
-                    replace(R.id.fragment_container, PostContentFragment())
-                    addToBackStack(null)
-                }
-                //TODO prepare view text old post
-                //TODO text New or Edit not changed
-               // postContentActivityLauncher.launch(it.content)
-            }
-        }
+//        viewModel.navigateToPostContentEditEvent.observe(this) {
+//            if (it != null) {
+//                parentFragmentManager.commit {
+//                    val fragment = PostContentFragment()
+//                    replace(R.id.fragment_container, fragment)
+//                    addToBackStack(null)
+//                }
+//                //TODO prepare view text old post
+//                //TODO text New or Edit not changed
+//               // postContentActivityLauncher.launch(it.content)
+//            }
+//        }
 
 
     }
@@ -94,7 +104,7 @@ class FeedFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = ActivityMainBinding.inflate(layoutInflater, container, false).also { binding ->
+    ) = FeedFragmentBinding.inflate(layoutInflater, container, false).also { binding ->
         val adapter = PostsAdapter(viewModel)
         binding.postRecyclerView.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
@@ -105,4 +115,8 @@ class FeedFragment : Fragment() {
             viewModel.onAddButtonClicked()
         }
     }.root
+
+    companion object {
+        const val TAG = "FeedFragment"
+    }
 }
