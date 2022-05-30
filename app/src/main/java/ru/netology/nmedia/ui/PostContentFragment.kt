@@ -1,6 +1,5 @@
 package ru.netology.nmedia.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,7 +23,6 @@ class PostContentFragment : Fragment() {
         savedInstanceState: Bundle?
 
     ) = PostContentFragmentBinding.inflate(layoutInflater).also { binding ->
-
         binding.edit.setText(args.initialContent)
         binding.edit.requestFocus()
         if (args.initialContent != null) {

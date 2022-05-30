@@ -21,10 +21,22 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     val sharePostContent = SingleLiveEvent<String>()
     val videoLinkPlay = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
+    val navigateToShowPost = SingleLiveEvent<Post>()
 
     fun onAddButtonClicked() {
         navigateToPostContentScreenEvent.call()
     }
+
+
+
+
+    override fun onShowPostClicked(post: Post) {
+        currentPost.value = post
+        navigateToShowPost.value = post
+    }
+
+
+
     override fun onLikeClicked(post: Post) = repository.like(post.id)
     override fun onRepostClicked(post: Post) {
         sharePostContent.value = post.content
@@ -34,7 +46,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     override fun onRemoveClicked(post: Post) = repository.delete(post.id)
     override fun onEditClicked(post: Post) {
         currentPost.value = post
-
         navigateToPostContentScreenEvent.value = post.content
     }
 

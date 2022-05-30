@@ -23,18 +23,6 @@ class FeedFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //  val binding = ActivityMainBinding.inflate(layoutInflater)
-        //  setContentView(binding.root)
-
-//        val adapter = PostsAdapter(viewModel)
-//        binding.postRecyclerView.adapter = adapter
-//        viewModel.data.observe(this) { posts ->
-//            adapter.submitList(posts)
-//        }
-//
-//        binding.fab.setOnClickListener {
-//            viewModel.onAddButtonClicked()
-//        }
         viewModel.sharePostContent.observe(this) { postContent ->
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
@@ -63,37 +51,11 @@ class FeedFragment : Fragment() {
         }
 
 
-//        val postContentActivityLauncher =
-//            registerForActivityResult(PostContentActivity.ResultContract) { postContent ->
-//                postContent ?: return@registerForActivityResult
-//                viewModel.onSaveButtonClicked(postContent)
-//
-//            }
-
         viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
-            //postContentActivityLauncher.launch(null)
-            val direction = FeedFragmentDirections.toPostContentFragment(initialContent)
+                       val direction = FeedFragmentDirections.toPostContentFragment(initialContent)
             findNavController().navigate(direction)
-//            parentFragmentManager.commit {
-//                val fragment = PostContentFragment.create(initialContent)
-//                replace(R.id.fragment_container, fragment)
-//                addToBackStack(null)
-//            }
+
         }
-//        viewModel.navigateToPostContentEditEvent.observe(this) {
-//            if (it != null) {
-//                parentFragmentManager.commit {
-//                    val fragment = PostContentFragment()
-//                    replace(R.id.fragment_container, fragment)
-//                    addToBackStack(null)
-//                }
-//                //TODO prepare view text old post
-//                //TODO text New or Edit not changed
-//               // postContentActivityLauncher.launch(it.content)
-//            }
-//        }
-
-
     }
 
 
