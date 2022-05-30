@@ -27,17 +27,13 @@ class PostContentFragment : Fragment() {
 
         binding.edit.setText(args.initialContent)
         binding.edit.requestFocus()
-        val intent = Intent()
-        val intentGetText: Bundle? = intent.extras
-        val textBodyPost = intentGetText?.get(POST_BODY_TEXT).toString()
-        if (textBodyPost != "null") {
+        if (args.initialContent != null) {
             binding.headerText.text = getString(R.string.headerTextEdit)
-            binding.edit.setText(textBodyPost)
         } else {
             binding.headerText.text = getString(R.string.headerTextCreate)
         }
         binding.returnFromCreatePost.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            findNavController().popBackStack()
         }
         binding.ok.setOnClickListener {
             onOkButtonClicked(binding)
