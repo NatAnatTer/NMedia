@@ -72,11 +72,8 @@ class FeedFragment : Fragment() {
 
         viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
             //postContentActivityLauncher.launch(null)
-
-            findNavController().navigate(
-                R.id.to_postContentFragment,
-                PostContentFragment.createBundle(initialContent)
-            )
+            val direction = FeedFragmentDirections.toPostContentFragment(initialContent)
+            findNavController().navigate(direction)
 //            parentFragmentManager.commit {
 //                val fragment = PostContentFragment.create(initialContent)
 //                replace(R.id.fragment_container, fragment)

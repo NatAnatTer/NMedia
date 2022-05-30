@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.21'
-
+    id 'org.jetbrains.kotlin.plugin.serialization' version "$kotlin_version"
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
 
 
-    def nav_version = "2.4.2"
+
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
