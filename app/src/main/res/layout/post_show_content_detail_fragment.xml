@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/post_show_content_detail_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
-    tools:context=".ui.FeedFragment"
-     >
-    <include
+    tools:context=".ui.PostShowDetailFragment">
+
+    <ScrollView
+        android:id="@+id/post_show_content_detail_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/post_list_item"/>
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        tools:context=".ui.PostShowDetailFragment">
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/post_list_item" />
 
 
-</ScrollView>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

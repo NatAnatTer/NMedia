@@ -56,6 +56,10 @@ class FeedFragment : Fragment() {
             findNavController().navigate(direction)
 
         }
+        viewModel.navigateToShowPost.observe(this){ initialContent ->
+
+
+        }
     }
 
 
