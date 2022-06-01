@@ -12,8 +12,6 @@ import ru.netology.nmedia.databinding.PostContentFragmentBinding
 
 class PostContentFragment : Fragment() {
 
-  //  supportActionBar?.hide() - TODO refactor
-
 
     private val args by navArgs<PostContentFragmentArgs>()
 

@@ -8,20 +8,41 @@
     <fragment
         android:id="@+id/feedFragment"
         android:name="ru.netology.nmedia.ui.FeedFragment"
-        tools:layout="@layout/feed_fragment" >
+        tools:layout="@layout/feed_fragment">
         <action
             android:id="@+id/to_postContentFragment"
             app:destination="@id/postContentFragment" />
+        <action
+            android:id="@+id/to_postShowContentFragment"
+            app:destination="@id/postShowContentFragment" />
 
     </fragment>
     <fragment
         android:id="@+id/postContentFragment"
-        android:name="ru.netology.nmedia.ui.PostContentFragment" >
-    <argument
-        android:name="initialContent"
-        app:argType="string"
-        app:nullable="true" />
-</fragment>
+        android:name="ru.netology.nmedia.ui.PostContentFragment">
+        <argument
+            android:name="initialContent"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_postContentFragment_to_postShowContentFragment"
+            app:destination="@id/postShowContentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/postShowContentFragment"
+        android:name="ru.netology.nmedia.ui.PostShowDetailFragment">
+        <argument
+            android:name="initialContent"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_postShowContentFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_postShowContentFragment_to_postContentFragment"
+            app:destination="@id/postContentFragment" />
+    </fragment>
 
 </navigation>
 

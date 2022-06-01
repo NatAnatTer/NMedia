@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ui.PostShowDetailFragment">
 
     <ScrollView
@@ -14,10 +15,11 @@
         tools:context=".ui.PostShowDetailFragment">
 
         <include
+            android:id="@+id/post_content_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout="@layout/post_list_item" />
+            layout="@layout/post_list_item" />
 
 
     </ScrollView>

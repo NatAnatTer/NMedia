@@ -13,7 +13,6 @@ import ru.netology.nmedia.postViewModel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FeedFragmentBinding
 
-//import ru.netology.nmedia.databinding.ActivityMainBinding
 
 class FeedFragment : Fragment() {
 
@@ -52,14 +51,17 @@ class FeedFragment : Fragment() {
 
 
         viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
-                       val direction = FeedFragmentDirections.toPostContentFragment(initialContent)
+            val direction = FeedFragmentDirections.toPostContentFragment(initialContent)
             findNavController().navigate(direction)
 
         }
-        viewModel.navigateToShowPost.observe(this){ initialContent ->
-
+        viewModel.navigateToShowPost.observe(this) { initialContent ->
+            val direction =
+                FeedFragmentDirections.toPostShowContentFragment(initialContent.toString())
+            findNavController().navigate(direction)
 
         }
+
     }
 
 
@@ -77,6 +79,7 @@ class FeedFragment : Fragment() {
         binding.fab.setOnClickListener {
             viewModel.onAddButtonClicked()
         }
+
     }.root
 
     companion object {
