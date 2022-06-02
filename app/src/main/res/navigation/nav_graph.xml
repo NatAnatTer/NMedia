@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/postShowContentFragment"
-        android:name="ru.netology.nmedia.ui.PostShowDetailFragment">
+        android:name="ru.netology.nmedia.ui.PostShowContentFragment">
         <argument
             android:name="initialContent"
             app:argType="string"

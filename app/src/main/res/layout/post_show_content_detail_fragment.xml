@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".ui.PostShowDetailFragment">
+    tools:context=".ui.PostShowContentFragment">
 
     <ScrollView
         android:id="@+id/post_show_content_detail_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        tools:context=".ui.PostShowDetailFragment">
+        tools:context=".ui.PostShowContentFragment">
 
         <include
             android:id="@+id/post_content_detail"

@@ -14,45 +14,37 @@ import ru.netology.nmedia.databinding.PostListItemBinding
 import java.text.DecimalFormat
 
 
-internal class PostsAdapter(
-    private val interactionListener: PostInteractionListener
+internal class PostsShowDetailAdapter(
+    private val interactionListener: PostShowDetailInteractionListener
 ) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallBack) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderPostDetail {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostListItemBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding, interactionListener)
+        return ViewHolderPostDetail(binding, interactionListener)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+     fun onBindViewHolder(holder: PostsShowDetailAdapter.ViewHolderPostDetail, position: Int) {
         holder.bind(getItem(position))
     }
 
-//    inner class vh(
-//        private val binding: PostListItemBinding,
-//        private val listener: PostInteractionListener
-//    ): ScrollView(binding.root) {
-//
-//
-//    }
-
-    inner class ViewHolder(
+    inner class ViewHolderPostDetail(
         private val binding: PostListItemBinding,
-        private val listener: PostInteractionListener
-    ) : RecyclerView.ViewHolder(binding.root) {
+        private val listener: PostShowDetailInteractionListener
+    ) : ScrollView.ViewHolderPostDetail(binding.root) {
 
         private lateinit var post: Post
         private val popupMenu by lazy {
-            PopupMenu(itemView.context, binding.menu).apply {
+            PopupMenu(context, binding.menu).apply {
                 inflate(R.menu.options_post)
                 setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.remove -> {
-                            listener.onRemoveClicked(post)
+                            listener.onRemoveClicked()
                             true
                         }
                         R.id.edit -> {
-                            listener.onEditClicked(post)
+                            listener.onEditClicked()
                             true
                         }
                         else -> false
@@ -62,13 +54,12 @@ internal class PostsAdapter(
         }
 
         init {
-            binding.like.setOnClickListener { listener.onLikeClicked(post) }
-            binding.reposts.setOnClickListener { listener.onRepostClicked(post) }
+            binding.like.setOnClickListener { listener.onLikeClicked() }
+            binding.reposts.setOnClickListener { listener.onRepostClicked() }
             binding.menu.setOnClickListener { popupMenu.show() }
-            binding.videoPreview.setOnClickListener { listener.onPlayVideoClicked(post) }
-            binding.videoPreviewButtonPlay.setOnClickListener { listener.onPlayVideoClicked(post) }
-            binding.date.setOnClickListener { listener.onShowPostClicked(post) }
-            binding.postBody.setOnClickListener { listener.onShowPostClicked(post) }
+            binding.videoPreview.setOnClickListener { listener.onPlayVideoClicked() }
+            binding.videoPreviewButtonPlay.setOnClickListener { listener.onPlayVideoClicked() }
+
         }
 
 
@@ -100,26 +91,32 @@ internal class PostsAdapter(
 
     }
 
-    private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
-        override fun areItemsTheSame(oldItem: Post, newItem: Post) =
-            oldItem.id == newItem.id
+//    private object DiffCallBack : DiffUtil.ItemCallback<Post>() {
+//        override fun areItemsTheSame(oldItem: Post, newItem: Post) =
+//            oldItem.id == newItem.id
+//
+//        override fun areContentsTheSame(oldItem: Post, newItem: Post) =
+//            oldItem == newItem
+//
+//    }
+//
+//    override fun onBindViewHolder(holder: PostsAdapter.ViewHolder, position: Int) {
+//        TODO("Not yet implemented")
+//    }
 
-        override fun areContentsTheSame(oldItem: Post, newItem: Post) =
-            oldItem == newItem
 
-    }
 }
 
-fun getTextViewCount(count: Int): String {
-    val df1 = DecimalFormat("#.#")
-    return when (count) {
-        in 0..999 -> count.toString()
-        in 1000..1099 -> (count / 1000).toString() + "K"
-        in 1100..9999 -> (df1.format((count / 100).toDouble() / 10.0)).toString() + "K"
-        in 10_000..999_999 -> (count / 1000).toString() + "K"
-        in 1_000_000..1_099_999 -> (count / 1_000_000).toString() + "M"
-        in 1_100_000..999_999_999 -> (df1.format((count / 100_000).toDouble() / 10.0)).toString() + "M"
-        else -> "1B"
-    }
+//fun getTextViewCount(count: Int): String {
+//    val df1 = DecimalFormat("#.#")
+//    return when (count) {
+//        in 0..999 -> count.toString()
+//        in 1000..1099 -> (count / 1000).toString() + "K"
+//        in 1100..9999 -> (df1.format((count / 100).toDouble() / 10.0)).toString() + "K"
+//        in 10_000..999_999 -> (count / 1000).toString() + "K"
+//        in 1_000_000..1_099_999 -> (count / 1_000_000).toString() + "M"
+//        in 1_100_000..999_999_999 -> (df1.format((count / 100_000).toDouble() / 10.0)).toString() + "M"
+//        else -> "1B"
+//    }
 }
 

@@ -5,12 +5,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostInteractionListener
+import ru.netology.nmedia.adapter.PostShowDetailInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.FilePostRepository
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.SingleLiveEvent
 
-class PostShowDetailViewModel(application: Application): AndroidViewModel(application), PostInteractionListener {
+class PostShowDetailViewModel(application: Application): AndroidViewModel(application), PostShowDetailInteractionListener {
     private val repository: PostRepository = FilePostRepository(application)
     val data by repository::data
     private val currentPost = MutableLiveData<Post?>(null)
@@ -18,27 +19,25 @@ class PostShowDetailViewModel(application: Application): AndroidViewModel(applic
     val videoLinkPlay = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
 
-    override   fun onLikeClicked(post: Post) = repository.like(post.id)
+    override   fun onLikeClicked() = repository.like()
 
-    override  fun onRepostClicked(post: Post) {
-        sharePostContent.value = post.content
+    override  fun onRepostClicked() {
+        sharePostContent.value = content
         repository.repost(post.id)
     }
 
-    override  fun onRemoveClicked(post: Post) = repository.delete(post.id)
+    override  fun onRemoveClicked() = repository.delete()
 
-    override  fun onEditClicked(post: Post) {
+    override  fun onEditClicked() {
         currentPost.value = post
         navigateToPostContentScreenEvent.value = post.content
     }
 
-    override fun onPlayVideoClicked(post: Post) {
+    override fun onPlayVideoClicked() {
         videoLinkPlay.value = post.urlVideo!!
     }
 
-    override fun onShowPostClicked(post: Post) {
 
-    }
 
 
     fun onSaveButtonClicked(content: String) {

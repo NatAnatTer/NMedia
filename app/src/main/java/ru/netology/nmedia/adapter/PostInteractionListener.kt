@@ -10,3 +10,12 @@ interface PostInteractionListener {
     fun onPlayVideoClicked(post: Post)
 fun onShowPostClicked(post: Post)
 }
+
+interface PostShowDetailInteractionListener {
+    fun onLikeClicked()
+    fun onRepostClicked()
+    fun onRemoveClicked()
+    fun onEditClicked()
+    fun onPlayVideoClicked()
+
+}
