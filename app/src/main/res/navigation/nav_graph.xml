@@ -33,9 +33,9 @@
         android:id="@+id/postShowContentFragment"
         android:name="ru.netology.nmedia.ui.PostShowContentFragment">
         <argument
-            android:name="initialContent"
-            app:argType="string"
-            app:nullable="true" />
+            android:name="idPost"
+            app:argType="long"
+            app:nullable="false" />
         <action
             android:id="@+id/action_postShowContentFragment_to_feedFragment"
             app:destination="@id/feedFragment" />

@@ -41,7 +41,8 @@ class FilePostRepository(
         data = MutableLiveData(posts)
     }
 
-    private var posts
+
+     private var posts
         get() = checkNotNull(data.value) {
             "value should be not null"
         }
@@ -90,7 +91,11 @@ class FilePostRepository(
         posts = listOf(post.copy(id = ++nextId)) + posts
     }
 
-    private companion object {
+    fun getPost(postId: Long) = posts.find { it.id == postId }
+
+    companion object {
+
+
         const val NEXT_ID_PREFS_KEYS = "nextId"
         const val FILE_NAME = "posts.json"
     }

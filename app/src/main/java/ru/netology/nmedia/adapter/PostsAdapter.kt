@@ -28,13 +28,7 @@ internal class PostsAdapter(
         holder.bind(getItem(position))
     }
 
-//    inner class vh(
-//        private val binding: PostListItemBinding,
-//        private val listener: PostInteractionListener
-//    ): ScrollView(binding.root) {
-//
-//
-//    }
+
 
     inner class ViewHolder(
         private val binding: PostListItemBinding,

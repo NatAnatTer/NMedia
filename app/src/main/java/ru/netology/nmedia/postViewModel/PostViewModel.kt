@@ -16,12 +16,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     PostInteractionListener {
     private val repository: PostRepository = FilePostRepository(application)
     val data by repository::data
-    private val currentPost = MutableLiveData<Post?>(null)
+     private val currentPost = MutableLiveData<Post?>(null)
 
     val sharePostContent = SingleLiveEvent<String>()
     val videoLinkPlay = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
-    val navigateToShowPost = SingleLiveEvent<Post>()
+    val navigateToShowPost = SingleLiveEvent<Long>()
 
     fun onAddButtonClicked() {
         navigateToPostContentScreenEvent.call()
@@ -29,7 +29,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
 
     override fun onShowPostClicked(post: Post) {
         currentPost.value = post
-        navigateToShowPost.value = post
+        navigateToShowPost.value = post.id
+
     }
 
 

@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:scrollbars="none"
     tools:context=".ui.PostShowContentFragment">
 
-    <ScrollView
-        android:id="@+id/post_show_content_detail_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        tools:context=".ui.PostShowContentFragment">
-
-        <include
-            android:id="@+id/post_content_detail"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            layout="@layout/post_list_item" />
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="-186dp"
+            tools:layout_editor_absoluteY="-203dp">
 
-
-    </ScrollView>
-</androidx.appcompat.widget.LinearLayoutCompat>
+                <TextView
+                    android:id="@+id/textPost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@tools:sample/lorem/random" />
+                <include
+                android:id="@+id/post_content_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                layout="@layout/post_list_item" />
+        </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
