@@ -91,7 +91,7 @@ class FilePostRepository(
         posts = listOf(post.copy(id = ++nextId)) + posts
     }
 
-    fun getPost(postId: Long) = posts.find { it.id == postId }
+  override fun getPost(postId: Long) = posts.find { it.id == postId }
 
     companion object {
 

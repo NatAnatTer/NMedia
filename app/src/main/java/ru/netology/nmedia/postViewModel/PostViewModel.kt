@@ -16,7 +16,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     PostInteractionListener {
     private val repository: PostRepository = FilePostRepository(application)
     val data by repository::data
-     private val currentPost = MutableLiveData<Post?>(null)
+     val currentPost = MutableLiveData<Post?>(null)
 
     val sharePostContent = SingleLiveEvent<String>()
     val videoLinkPlay = SingleLiveEvent<String>()
@@ -31,9 +31,10 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
         currentPost.value = post
         navigateToShowPost.value = post.id
 
+
     }
 
-
+fun getPost(postId: Long) = repository.getPost(postId)
 
     override fun onLikeClicked(post: Post) = repository.like(post.id)
     override fun onRepostClicked(post: Post) {

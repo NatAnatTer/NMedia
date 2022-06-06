@@ -55,8 +55,12 @@ class FeedFragment : Fragment() {
             findNavController().navigate(direction)
 
         }
-        viewModel.navigateToShowPost.observe(this) { initialContent ->
-            val direction = FeedFragmentDirections.toPostShowContentFragment(initialContent)
+        viewModel.navigateToShowPost.observe(this) { idPost ->
+            val direction = idPost?.let {
+                FeedFragmentDirections.toPostShowContentFragment(
+                    it
+                )
+            }
             if (direction != null) {
                 findNavController().navigate(direction)
             }

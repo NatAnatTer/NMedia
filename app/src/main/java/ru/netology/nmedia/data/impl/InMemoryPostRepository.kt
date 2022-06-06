@@ -61,6 +61,10 @@ class InMemoryPostRepository : PostRepository {
 
     }
 
+    override fun getPost(postId: Long): Post? {
+        TODO("Not yet implemented")
+    }
+
     private fun update(post: Post) {
         data.value = posts.map {
             if (it.id == post.id) post else it

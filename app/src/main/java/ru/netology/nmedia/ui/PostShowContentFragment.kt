@@ -21,16 +21,19 @@ import ru.netology.nmedia.databinding.PostListItemBinding
 import ru.netology.nmedia.databinding.PostShowContentDetailFragmentBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.postViewModel.PostShowDetailViewModel
+import ru.netology.nmedia.postViewModel.PostViewModel
 
 //private const val ID_POST_ARG = "PostId"
 
 class PostShowContentFragment : Fragment() {
 
-    private val viewModel by viewModels<PostShowDetailViewModel>()
+    private val viewModel by viewModels<PostViewModel>()
     private val args by navArgs<PostShowContentFragmentArgs>()
 
 
-    val post = viewModel.currentPost.value
+  //  val post = viewModel.currentPost.value
+    //  val repository: PostRepository = FilePostRepository()
+      val post = viewModel.getPost(args.idPost)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        //  val repository: PostRepository = FilePostRepository()
