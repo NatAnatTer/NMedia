@@ -13,16 +13,12 @@
             tools:layout_editor_absoluteX="-186dp"
             tools:layout_editor_absoluteY="-203dp">
 
-                <TextView
-                    android:id="@+id/textPost"
+
+                <include
+                    android:id="@+id/post_content_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@tools:sample/lorem/random" />
-                <include
-                android:id="@+id/post_content_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                layout="@layout/post_list_item" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    layout="@layout/post_list_item" />
         </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

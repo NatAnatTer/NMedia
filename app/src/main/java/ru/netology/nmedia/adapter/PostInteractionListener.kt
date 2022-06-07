@@ -11,11 +11,11 @@ interface PostInteractionListener {
     fun onShowPostClicked(post: Post)
 }
 
-interface PostShowDetailInteractionListener {
-    fun onLikeClicked()
-    fun onRepostClicked()
-    fun onRemoveClicked()
-    fun onEditClicked()
-    fun onPlayVideoClicked()
-
-}
+//interface PostShowDetailInteractionListener {
+//    fun onLikeClicked()
+//    fun onRepostClicked()
+//    fun onRemoveClicked()
+//    fun onEditClicked()
+//    fun onPlayVideoClicked()
+//
+//}

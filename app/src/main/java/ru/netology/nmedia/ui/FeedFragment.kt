@@ -56,25 +56,18 @@ class FeedFragment : Fragment() {
 
         }
         viewModel.navigateToShowPost.observe(this) { idPost ->
-            val direction = idPost?.let {
-                FeedFragmentDirections.toPostShowContentFragment(
-                    it
-                )
-            }
+            val direction = idPost?.let { FeedFragmentDirections.toPostShowContentFragment(it) }
             if (direction != null) {
                 findNavController().navigate(direction)
             }
-
         }
+
+    }
 
 
 //        fun onPostShowContentSelected(postId: Long){
 //            val fragment = PostShowContentFragment.newInstance(postId)
 //
-
-
-
-    }
 
 
     override fun onCreateView(
