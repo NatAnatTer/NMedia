@@ -25,8 +25,9 @@
             app:argType="string"
             app:nullable="true" />
         <action
-            android:id="@+id/action_postContentFragment_to_postShowContentFragment"
+            android:id="@+id/to_postShowContentFragment"
             app:destination="@id/postShowContentFragment" />
+
     </fragment>
 
     <fragment
@@ -37,10 +38,10 @@
             app:argType="long"
             app:nullable="false" />
         <action
-            android:id="@+id/action_postShowContentFragment_to_feedFragment"
+            android:id="@+id/to_feedFragment"
             app:destination="@id/feedFragment" />
         <action
-            android:id="@+id/action_postShowContentFragment_to_postContentFragment"
+            android:id="@+id/to_postContentFragment"
             app:destination="@id/postContentFragment" />
     </fragment>
 

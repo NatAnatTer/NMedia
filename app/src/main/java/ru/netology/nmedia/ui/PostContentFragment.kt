@@ -45,13 +45,21 @@ class PostContentFragment : Fragment() {
             resultBundle.putString(RESULT_KEY, content)
             setFragmentResult(REQUEST_KEY, resultBundle)
         }
-            findNavController().popBackStack()
+              findNavController().popBackStack()
+//                findNavController().run{
+//                    popBackStack()
+//                    navigate(R.id.postShowContentFragment)
+//                }
+
     }
 
     companion object {
         const val RESULT_KEY = "postNewContent"
-        const val POST_BODY_TEXT = "Post body"
         const val REQUEST_KEY = "requestKey"
 
     }
 }
+
+//<action
+//android:id="@+id/action_postContentFragment_to_postShowContentFragment"
+//app:destination="@id/postShowContentFragment" />

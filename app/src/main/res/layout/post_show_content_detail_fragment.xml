@@ -7,18 +7,17 @@
     android:scrollbars="none"
     tools:context=".ui.PostShowContentFragment">
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-186dp"
+        tools:layout_editor_absoluteY="-203dp">
+
+        <include
+            android:id="@+id/post_content_detail"
+            layout="@layout/post_list_item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="-186dp"
-            tools:layout_editor_absoluteY="-203dp">
-
-
-                <include
-                    android:id="@+id/post_content_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    layout="@layout/post_list_item" />
-        </ScrollView>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
