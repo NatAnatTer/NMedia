@@ -105,7 +105,9 @@ class PostShowContentFragment : Fragment() {
                     like.isChecked = post.likedByMe
                     usersViews.text = getTextViewCount(post.views)
                     reposts.text = getTextViewCount(post.reposts)
-                    avatar.setImageResource(post.avatar.toInt())
+                 // avatar.setImageResource(R.drawable.ic_new_avatar_48)
+                    avatar.setImageResource(if (post.avatar == "0") R.drawable.ic_new_avatar_48 else post.avatar.toInt())
+
                     if (post.videoAttachmentCover != null) {
                         videoPreview.setImageResource(post.videoAttachmentCover.toInt())
                         videoTitle.text = post.videoAttachmentHeader

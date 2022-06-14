@@ -28,24 +28,6 @@ class SharedPrefsPostRepository(
         }
     }
 
-    //    override val data = MutableLiveData(
-//        List(GENERATED_POST_AMOUNT) { index ->
-//            Post(
-//                id = index + 1L,
-//                author = "Нетология. Университет интернет-профессий будущего",
-//                content = "$index Привет, это новая Нетология! Наша миссия — помочь встать на путь роста и начать цепочку перемен → https://www.youtube.com/watch?v=WhWc3b3KhnY",
-//                published = "05.05.2022",
-//                likedByMe = false,
-//                likes = 1099,
-//                reposts = 10,
-//                views = 1000,
-//                avatar = R.drawable.ic_netology,
-//                videoAttachmentCover = R.drawable.cat,
-//                videoAttachmentHeader = "New video about my beautiful kat",
-//                urlVideo = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
-//            )
-//        }
-//    )
     override val data: MutableLiveData<List<Post>>
 
     init {

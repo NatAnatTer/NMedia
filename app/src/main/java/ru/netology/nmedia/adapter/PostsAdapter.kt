@@ -74,9 +74,15 @@ internal class PostsAdapter(
                 like.isChecked = post.likedByMe
                 usersViews.text = getTextViewCount(post.views)
                 reposts.text = getTextViewCount(post.reposts)
-                avatar.setImageResource(post.avatar)
+//                (if (post.avatar == "1" || post.avatar == "NULL") R.drawable.ic_new_avatar_48 else post.avatar?.toInt())?.let {
+//                    avatar.setImageResource(
+//                        it
+//                    )
+//                }
+                avatar.setImageResource(if (post.avatar == "0") R.drawable.ic_new_avatar_48 else post.avatar.toInt())
+               // avatar.setImageResource(R.drawable.ic_new_avatar_48)
                 if (post.videoAttachmentCover != null) {
-                    videoPreview.setImageResource(post.videoAttachmentCover)
+                    videoPreview.setImageResource(post.videoAttachmentCover.toInt())
                     videoTitle.text = post.videoAttachmentHeader
                     videoPreview.visibility = View.VISIBLE
                     videoTitle.visibility = View.VISIBLE

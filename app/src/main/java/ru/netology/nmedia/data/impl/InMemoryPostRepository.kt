@@ -21,8 +21,8 @@ class InMemoryPostRepository : PostRepository {
                 likes = 1099,
                 reposts = 10,
                 views = 1000,
-                avatar = R.drawable.ic_netology,
-                videoAttachmentCover = R.drawable.cat,
+                avatar = "R.drawable.ic_netology",
+                videoAttachmentCover = "R.drawable.cat",
                 videoAttachmentHeader = "New video about my beautiful kat",
                 urlVideo = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
             )

@@ -13,12 +13,13 @@ object PostsTable {
         ${Column.LIKED_BY_ME.columnName} BOOLEAN NOT NULL DEFAULT 0,
         ${Column.VIEWS.columnName} INTEGER NOT NULL DEFAULT 0,
         ${Column.REPOSTS.columnName} INTEGER NOT NULL DEFAULT 0,
-        ${Column.AVATAR.columnName} TEXT DEFAULT "R.drawable.ic_new_avatar_48", 
+        ${Column.AVATAR.columnName} TEXT NOT NULL DEFAULT 0, 
         ${Column.VIDEO_ATTACHMENT_COVER.columnName} INTEGER DEFAULT NULL,
         ${Column.VIDEO_ATTACHMENT_HEADER.columnName} TEXT DEFAULT NULL,
-        ${Column.URL_VIDEO.columnName} TEXT DEFAULT NULL,
+        ${Column.URL_VIDEO.columnName} TEXT DEFAULT NULL
         );
     """.trimIndent()
+
 
     val ALL_COLUMNS_NAME = Column.values().map {
         it.columnName
