@@ -1,25 +1,17 @@
 package ru.netology.nmedia.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Binder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.ScrollView
 import androidx.fragment.app.*
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.navigateUp
-import kotlinx.coroutines.NonDisposableHandle.parent
 import ru.netology.nmedia.R
-import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.adapter.getTextViewCount
-import ru.netology.nmedia.databinding.PostListItemBinding
 import ru.netology.nmedia.databinding.PostShowContentDetailFragmentBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.postViewModel.PostViewModel
@@ -59,15 +51,12 @@ class PostShowContentFragment : Fragment() {
             val newPostContent =
                 bundle.getString(PostContentFragment.RESULT_KEY) ?: return@setFragmentResultListener
             viewModel.onSaveButtonClicked(newPostContent)
-
         }
 
         viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
             val direction = PostShowContentFragmentDirections.toPostContentFragment(initialContent)
             findNavController().navigate(direction)
-
         }
-
     }
 
     override fun onCreateView(
@@ -108,30 +97,27 @@ class PostShowContentFragment : Fragment() {
                 menu.setOnClickListener { popupMenu.show() }
                 videoPreview.setOnClickListener { viewModel.onPlayVideoClicked(post) }
                 videoPreviewButtonPlay.setOnClickListener { viewModel.onPlayVideoClicked(post) }
-
-               // fun bind(post: Post) {
-                    with(binding.postContentDetail) {
-                        authorName.text = post.author
-                        date.text = post.published
-                        post.content.also { postBody.text = it }
-                        like.text = getTextViewCount(post.likes)
-                        like.isChecked = post.likedByMe
-                        usersViews.text = getTextViewCount(post.views)
-                        reposts.text = getTextViewCount(post.reposts)
-                        avatar.setImageResource(post.avatar)
-                        if (post.videoAttachmentCover != null) {
-                            videoPreview.setImageResource(post.videoAttachmentCover)
-                            videoTitle.text = post.videoAttachmentHeader
-                            videoPreview.visibility = View.VISIBLE
-                            videoTitle.visibility = View.VISIBLE
-                            videoPreviewButtonPlay.visibility = View.VISIBLE
-                        } else {
-                            videoPreview.visibility = View.GONE
-                            videoTitle.visibility = View.GONE
-                            videoPreviewButtonPlay.visibility = View.GONE
-                        }
+                with(binding.postContentDetail) {
+                    authorName.text = post.author
+                    date.text = post.published
+                    post.content.also { postBody.text = it }
+                    like.text = getTextViewCount(post.likes)
+                    like.isChecked = post.likedByMe
+                    usersViews.text = getTextViewCount(post.views)
+                    reposts.text = getTextViewCount(post.reposts)
+                    avatar.setImageResource(post.avatar)
+                    if (post.videoAttachmentCover != null) {
+                        videoPreview.setImageResource(post.videoAttachmentCover)
+                        videoTitle.text = post.videoAttachmentHeader
+                        videoPreview.visibility = View.VISIBLE
+                        videoTitle.visibility = View.VISIBLE
+                        videoPreviewButtonPlay.visibility = View.VISIBLE
+                    } else {
+                        videoPreview.visibility = View.GONE
+                        videoTitle.visibility = View.GONE
+                        videoPreviewButtonPlay.visibility = View.GONE
                     }
-              //  }
+                }
             }
 
         } else findNavController().popBackStack()
@@ -139,23 +125,13 @@ class PostShowContentFragment : Fragment() {
 
     private fun onLikeClickedUser(post: Post) {
         viewModel.onLikeClicked(post)
-        supportFragmentManager.commit{
 
-        }
+
+
         findNavController().apply {
             onDetach()
             onAttach(context)
-           // onCreateView(layoutInflater, null, null)
         }
-    //    findNavController().run{
-//            onDestroy()
-//            onCreateView(layoutInflater, null, null)
-  //      }
-       // onDestroy()
-       // onDetach()
-            // context?.let { onAttach(it) }
-        // findNavController().navigate(R.id.postShowContentFragment, post.id)
-
     }
 }
 

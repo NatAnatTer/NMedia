@@ -64,12 +64,6 @@ class FeedFragment : Fragment() {
 
     }
 
-
-//        fun onPostShowContentSelected(postId: Long){
-//            val fragment = PostShowContentFragment.newInstance(postId)
-//
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

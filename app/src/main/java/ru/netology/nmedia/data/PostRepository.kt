@@ -14,6 +14,7 @@ interface PostRepository {
     fun delete(postId: Long)
 
     fun save(post: Post)
+
     fun getPost(postId: Long): Post?
 
     companion object {

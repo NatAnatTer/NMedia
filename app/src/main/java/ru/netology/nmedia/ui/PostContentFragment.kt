@@ -45,12 +45,7 @@ class PostContentFragment : Fragment() {
             resultBundle.putString(RESULT_KEY, content)
             setFragmentResult(REQUEST_KEY, resultBundle)
         }
-              findNavController().popBackStack()
-//                findNavController().run{
-//                    popBackStack()
-//                    navigate(R.id.postShowContentFragment)
-//                }
-
+        findNavController().popBackStack()
     }
 
     companion object {
@@ -60,6 +55,3 @@ class PostContentFragment : Fragment() {
     }
 }
 
-//<action
-//android:id="@+id/action_postContentFragment_to_postShowContentFragment"
-//app:destination="@id/postShowContentFragment" />

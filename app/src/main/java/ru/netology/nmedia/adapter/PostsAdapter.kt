@@ -28,8 +28,6 @@ internal class PostsAdapter(
         holder.bind(getItem(position))
     }
 
-
-
     inner class ViewHolder(
         private val binding: PostListItemBinding,
         private val listener: PostInteractionListener
