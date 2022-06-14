@@ -46,14 +46,19 @@ class SQLiteRepository(
         }
 
     }
-
     override fun getPost(postId: Long): Post? {
-        TODO("Not yet implemented")
+        dao.getById(postId)
+        return posts.find { it.id == postId }
     }
 
     override fun repost(postId: Long) {
-        TODO("Not yet implemented")
+
+        dao.repost(postId)
+        data.value = posts.map {
+            if (it.id != postId) it
+            else it.copy(
+                reposts = it.reposts + 1
+            )
+        }
     }
-
-
 }

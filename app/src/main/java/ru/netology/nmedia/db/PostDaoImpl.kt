@@ -20,6 +20,30 @@ class PostDaoImpl(
             }
         }
 
+    override fun getById(id: Long) {
+        db.query(
+            PostsTable.NAME,
+            PostsTable.ALL_COLUMNS_NAME,
+            "${PostsTable.Column.ID.columnName} =?",
+            arrayOf(id.toString()), null, null, null
+        ).use { cursor ->
+            List(cursor.count) {
+                cursor.moveToNext()
+                cursor.toPost()
+            }
+        }
+    }
+
+    override fun repost(id: Long) {
+        db.execSQL(
+            """
+               UPDATE "${PostsTable.NAME}" SET
+               repost = repost + 1 
+           """.trimIndent(),
+            arrayOf(id)
+        )
+    }
+
 
     override fun save(post: Post): Post {
         val values = ContentValues().apply {
