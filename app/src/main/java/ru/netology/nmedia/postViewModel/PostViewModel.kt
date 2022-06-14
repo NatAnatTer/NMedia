@@ -9,12 +9,16 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.FilePostRepository
+import ru.netology.nmedia.data.impl.SQLiteRepository
 import ru.netology.nmedia.data.impl.SharedPrefsPostRepository
+import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.util.SingleLiveEvent
 
 class PostViewModel(application: Application) : AndroidViewModel(application),
     PostInteractionListener {
-    private val repository: PostRepository = FilePostRepository(application)
+    private val repository: PostRepository = SQLiteRepository(
+        dao = AppDb.getInstance(context = application).postDao
+    )
     val data by repository::data
     private val currentPost = MutableLiveData<Post?>(null)
 
@@ -61,7 +65,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
             author = "Me",
             content = content,
             published = "Now",
-            avatar = R.drawable.ic_new_avatar_48,
+            avatar = "R.drawable.ic_new_avatar_48",
             videoAttachmentCover = null,
             videoAttachmentHeader = null,
             urlVideo = null

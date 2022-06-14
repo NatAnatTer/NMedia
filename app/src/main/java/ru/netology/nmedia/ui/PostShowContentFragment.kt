@@ -105,9 +105,9 @@ class PostShowContentFragment : Fragment() {
                     like.isChecked = post.likedByMe
                     usersViews.text = getTextViewCount(post.views)
                     reposts.text = getTextViewCount(post.reposts)
-                    avatar.setImageResource(post.avatar)
+                    avatar.setImageResource(post.avatar.toInt())
                     if (post.videoAttachmentCover != null) {
-                        videoPreview.setImageResource(post.videoAttachmentCover)
+                        videoPreview.setImageResource(post.videoAttachmentCover.toInt())
                         videoTitle.text = post.videoAttachmentHeader
                         videoPreview.visibility = View.VISIBLE
                         videoTitle.visibility = View.VISIBLE
