@@ -74,7 +74,7 @@ internal class PostsAdapter(
                 like.isChecked = post.likedByMe
                 usersViews.text = getTextViewCount(post.views)
                 reposts.text = getTextViewCount(post.reposts)
-                avatar.setImageResource(if (post.avatar == "0") R.drawable.ic_new_avatar_48 else post.avatar.toInt())
+                avatar.setImageResource(post.avatar)
                 if (post.videoAttachmentCover != null) {
                     videoPreview.setImageResource(post.videoAttachmentCover.toInt())
                     videoTitle.text = post.videoAttachmentHeader
