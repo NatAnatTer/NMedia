@@ -26,6 +26,7 @@ captures/
 .externalNativeBuild
 .cxx
 
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -47,3 +48,6 @@ captures/
 
 ### Gradle ###
 !gradle/wrapper/gradle-wrapper.jar
+
+
+google-services.json
