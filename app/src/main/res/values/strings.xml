@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">NMedia</string>
     <string name="nmedia">NMedia!</string>
+    <string name="post_avatar">Post avatar</string>
+    <string name="option" translatable="false">Menu</string>
+    <string name="likes">Likes</string>
+    <string name="share">Share</string>
+    <string name="views">Views</string>
+    <string name="remove">Remove</string>
+    <string name="post_text_hint">Enter text</string>
+    <string name="description_post_like">Save</string>
+    <string name="menu_edit">Edit</string>
+    <string name="description_undo_editing">Undo editing</string>
+    <string name="edit_header">Editing</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="description_post_save">Save</string>
+    <string name="add_post">Add new post</string>
+    <string name="back">come back from create post</string>
+    <string name="headerTextEdit">Edit post</string>
+    <string name="headerTextCreate">Create post</string>
+    <string name="videoAttachment">Video</string>
+    <string name="chooser_play_video">Play video</string>
+    <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
+    <string name="channel_remote_name">Server notifications</string>
+    <string name="channel_remote_description">Notifications from remote server</string>
+    <string name="notification_user_new_post">User %1$s create new post</string>
+
 </resources>
