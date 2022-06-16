@@ -20,4 +20,7 @@
     <string name="headerTextCreate">Создание</string>
     <string name="videoAttachment">Видео</string>
     <string name="chooser_play_video">Воспроизвести видео</string>
+    <string name="notification_user_liked">Пользователь%1$s лайкнул %2$s\'s пост</string>
+    <string name="channel_remote_name">Уведомление сервера</string>
+    <string name="channel_remote_description">Уведомление от удаленного сервера</string>
 </resources>
