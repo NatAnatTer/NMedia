@@ -40,7 +40,7 @@ class FCMService : FirebaseMessagingService() {
 
         when (action) {
             Action.Like -> handleLikeAction(data[CONTENT_KEY] ?: return)
-
+            Action.NewPost -> handlePostAction(data[CONTENT_KEY] ?: return)
         }
     }
 
@@ -50,7 +50,6 @@ class FCMService : FirebaseMessagingService() {
 
     private fun handleLikeAction(serializedContent: String) {
         val likeContent = gson.fromJson(serializedContent, Like::class.java)
-
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(
@@ -66,10 +65,29 @@ class FCMService : FirebaseMessagingService() {
             .notify(Random.nextInt(100_000), notification)
     }
 
+    private fun handlePostAction(serializedContent: String) {
+        val postContent = gson.fromJson(serializedContent, NewPost::class.java)
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(
+                getString(
+                    R.string.notification_user_new_post,
+                    postContent.postAuthor
+                )
+            )
+            .setContentText(postContent.postContent)
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(postContent.postContent)
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+        NotificationManagerCompat.from(this)
+            .notify(Random.nextInt(100_000), notification)
+    }
+
     private companion object {
         const val CONTENT_KEY = "content"
         const val CHANNEL_ID = "remote"
     }
 }
-
-//dyWrZ7A-RdWnFnx4-QhQTY:APA91bGmr7B27B-hef2vXEfEDb4WH1tpl2vPi_KP2l357sBXV-S0-krI6nNROdDaJpD-GdLxKy47qZWNU1qqoKilKQhMr7FihLhja3r5Fc37rxf7TOYWA-I14uSKKbMeRyzEL-hkbW3l
