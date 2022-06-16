@@ -29,7 +29,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application),
     }
 
     override fun onShowPostClicked(post: Post) {
-        currentPost.value = post
+        //currentPost.value = post
         navigateToShowPost.value = post.id
     }
 

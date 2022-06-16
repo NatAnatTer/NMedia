@@ -28,7 +28,7 @@ internal class PostsAdapter(
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(
+     class ViewHolder(
         private val binding: PostListItemBinding,
         private val listener: PostInteractionListener
     ) : RecyclerView.ViewHolder(binding.root) {

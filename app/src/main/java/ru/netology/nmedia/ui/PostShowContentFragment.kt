@@ -11,6 +11,7 @@ import androidx.fragment.app.*
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.R
+import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.adapter.getTextViewCount
 import ru.netology.nmedia.databinding.PostShowContentDetailFragmentBinding
 import ru.netology.nmedia.dto.Post
@@ -20,7 +21,7 @@ import ru.netology.nmedia.postViewModel.PostViewModel
 class PostShowContentFragment : Fragment() {
 
     private val args by navArgs<PostShowContentFragmentArgs>()
-    private val viewModel by viewModels<PostViewModel>()
+    private val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,12 +47,6 @@ class PostShowContentFragment : Fragment() {
             startActivity(openVideoIntent)
         }
 
-        setFragmentResultListener(requestKey = PostContentFragment.REQUEST_KEY) { requestKey, bundle ->
-            if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
-            val newPostContent =
-                bundle.getString(PostContentFragment.RESULT_KEY) ?: return@setFragmentResultListener
-            viewModel.onSaveButtonClicked(newPostContent)
-        }
 
         viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
             val direction = PostShowContentFragmentDirections.toPostContentFragment(initialContent)
@@ -59,87 +54,30 @@ class PostShowContentFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        setFragmentResultListener(requestKey = PostContentFragment.REQUEST_KEY) { requestKey, bundle ->
+            if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
+            val newPostContent =
+                bundle.getString(PostContentFragment.RESULT_KEY) ?: return@setFragmentResultListener
+            viewModel.onSaveButtonClicked(newPostContent)
+        }
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = PostShowContentDetailFragmentBinding.inflate(inflater, container, false).also { binding ->
-        val post = viewModel.getPost(args.idPost)
-
-        if (post != null) {
-            val popupMenu by lazy {
-                PopupMenu(context, binding.postContentDetail.menu).apply {
-                    inflate(R.menu.options_post)
-                    setOnMenuItemClickListener { menuItem ->
-                        when (menuItem.itemId) {
-                            R.id.remove -> {
-                                viewModel.onRemoveClicked(post)
-                                findNavController().run {
-                                    popBackStack()
-                                    navigate(R.id.feedFragment)
-                                }
-                                true
-                            }
-                            R.id.edit -> {
-                                viewModel.onEditClicked(post)
-
-                                true
-                            }
-                            else -> false
-                        }
-                    }
-                }
+        val viewHolder = PostsAdapter.ViewHolder(binding.postContentDetail, viewModel)
+        viewModel.data.observe(viewLifecycleOwner) { posts ->
+            val post = posts.find { it.id == args.idPost } ?: run {
+                findNavController().navigateUp() // the post was deleted, close the fragment
+                return@observe
             }
-
-            with(binding.postContentDetail) {
-                like.setOnClickListener { onLikeClickedUser(post) }
-                reposts.setOnClickListener { viewModel.onRepostClicked(post) }
-                menu.setOnClickListener { popupMenu.show() }
-                videoPreview.setOnClickListener { viewModel.onPlayVideoClicked(post) }
-                videoPreviewButtonPlay.setOnClickListener { viewModel.onPlayVideoClicked(post) }
-                with(binding.postContentDetail) {
-                    authorName.text = post.author
-                    date.text = post.published
-                    post.content.also { postBody.text = it }
-                    like.text = getTextViewCount(post.likes)
-                    like.isChecked = post.likedByMe
-                    usersViews.text = getTextViewCount(post.views)
-                    reposts.text = getTextViewCount(post.reposts)
-                 // avatar.setImageResource(R.drawable.ic_new_avatar_48)
-                    avatar.setImageResource(post.avatar)
-
-                    if (post.videoAttachmentCover != null) {
-                        videoPreview.setImageResource(post.videoAttachmentCover.toInt())
-                        videoTitle.text = post.videoAttachmentHeader
-                        videoPreview.visibility = View.VISIBLE
-                        videoTitle.visibility = View.VISIBLE
-                        videoPreviewButtonPlay.visibility = View.VISIBLE
-                    } else {
-                        videoPreview.visibility = View.GONE
-                        videoTitle.visibility = View.GONE
-                        videoPreviewButtonPlay.visibility = View.GONE
-                    }
-                }
-            }
-
-        } else findNavController().popBackStack()
-    }.root
-
-    private fun onLikeClickedUser(post: Post) {
-        viewModel.onLikeClicked(post)
-
-
-
-        findNavController().apply {
-            onDetach()
-            onAttach(context)
+            viewHolder.bind(post)
         }
-    }
+    }.root
 }
-
-
-
-
-
-
-

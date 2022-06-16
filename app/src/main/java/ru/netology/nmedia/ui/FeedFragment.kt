@@ -16,7 +16,7 @@ import ru.netology.nmedia.databinding.FeedFragmentBinding
 
 class FeedFragment : Fragment() {
 
-    private val viewModel by viewModels<PostViewModel>()
+    private val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
 
     @SuppressLint("QueryPermissionsNeeded")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +42,7 @@ class FeedFragment : Fragment() {
             startActivity(openVideoIntent)
         }
 
-        setFragmentResultListener(requestKey = PostContentFragment.REQUEST_KEY) { requestKey, bundle ->
-            if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
-            val newPostContent =
-                bundle.getString(PostContentFragment.RESULT_KEY) ?: return@setFragmentResultListener
-            viewModel.onSaveButtonClicked(newPostContent)
-        }
+
 
 
         viewModel.navigateToPostContentScreenEvent.observe(this) { initialContent ->
@@ -60,6 +55,18 @@ class FeedFragment : Fragment() {
             if (direction != null) {
                 findNavController().navigate(direction)
             }
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setFragmentResultListener(requestKey = PostContentFragment.REQUEST_KEY) { requestKey, bundle ->
+            if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
+            val newPostContent =
+                bundle.getString(PostContentFragment.RESULT_KEY) ?: return@setFragmentResultListener
+            viewModel.onSaveButtonClicked(newPostContent)
         }
 
     }
